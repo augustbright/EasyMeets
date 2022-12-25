@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct ParticipantsApp: App {
+    @StateObject var data = DataModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(data)
         }
     }
 }
