@@ -11,17 +11,19 @@ struct EventPreviewData: Codable, Identifiable {
     var id: Int
     var title: String
     var description: String
-    var imagePreview: String
+    var imagePreview: String?
     private var startDate: String
     var finishDate: String?
     var address: String
-    var longtitude: Float
-    var latitude: Float
+    var longtitude: Float?
+    var latitude: Float?
     var author: Author
     var community: Community
     var isFavorite: Bool;
     var peopleAttending: Int;
     var peopleThinking: Int;
+    var isAttending: Bool? = false;
+    var isThinking: Bool? = false;
     
     var startDateFormatted: Date? {
         let newFormatter = ISO8601DateFormatter()

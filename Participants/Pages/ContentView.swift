@@ -10,15 +10,19 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
             TabView {
+                HomePage()
+                    .tabItem {
+                        Label("Home", systemImage: "house.fill")
+                    }
                 ExplorePage()
                     .tabItem {
                         Label("Explore", systemImage: "list.bullet.below.rectangle")
                     }
-                MyProfilePage()
+                LoginPage()
                     .tabItem {
                         Label("Profile", systemImage: "person.crop.circle.fill")
-                    }
-            }
+                    }                
+            }.tabViewStyle(DefaultTabViewStyle())
     }
 }
 

@@ -7,27 +7,57 @@
 
 import SwiftUI
 
+enum ButtonKind {
+    case regular, prominent
+}
+
+extension Button {
+    @ViewBuilder
+    func buttonKind(_ kind: ButtonKind) -> some View {
+        switch kind {
+        case .prominent:
+            buttonStyle(.borderedProminent)
+        case .regular:
+            buttonStyle(.bordered)
+        }
+    }
+}
+
+
 struct ExplorePage: View {
+    enum Category {
+        case events, communities
+    }
+
     @EnvironmentObject var data: DataModel
+    @State private var category: Category = .events
 
     var body: some View {
-            NavigationStack() {
-                NavigationLink {
-                    CreateEventPage()
+        VStack {
+            HStack {
+                Button {
+                    category = .events
                 } label: {
-                    Label("Create event", systemImage: "plus.app")
+                    Label("Events", systemImage: "party.popper")
                 }
-                    List(data.eventPreviews) { eventPreview in
-                        NavigationLink  {
-                            EventPage(event: eventPreview)
-                        } label: {
-                            EventPreview(eventPreview: eventPreview)
-                        }
-                    }
-        
-                .navigationTitle("Explore")
+                .buttonKind(category == .events ? .prominent : .regular)
+                    
+                Button {
+                    category = .communities
+                } label: {
+                    Label("Communities", systemImage: "person.3.fill")
+                }
+                .buttonKind(category == .communities ? .prominent : .regular)
             }
-        
+            .buttonBorderShape(.capsule)
+            
+            switch category {
+            case .events:
+                ExploreEventsView()
+            case .communities:
+                ExploreCommunitiesView()
+            }
+        }
     }
 }
 

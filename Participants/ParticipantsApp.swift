@@ -6,10 +6,16 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 @main
 struct ParticipantsApp: App {
     @StateObject var data = DataModel()
+    
+    init() {
+        FirebaseApp.configure()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()

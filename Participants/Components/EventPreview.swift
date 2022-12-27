@@ -23,8 +23,20 @@ struct EventPreview: View {
                 .foregroundColor(Color.gray)
 
             HStack(alignment: .top) {
-                AsyncImage(url: URL(string: eventPreview.imagePreview))
-                    .frame(width: 100.0, height: 100.0)
+                if let image = eventPreview.imagePreview {
+                    AsyncImage(
+                        url: URL(string:image),
+                                    content: { image in
+                                        image.resizable()
+                                             .aspectRatio(contentMode: .fit)
+                                             .frame(maxWidth: 100, maxHeight: 100)
+                                    },
+                                    placeholder: {
+                                        ProgressView()
+                                            .frame(width: 100.0, height: 100.0)
+                                    }
+                    )
+                }
                 VStack(alignment: .leading) {
                     Text(eventPreview.description)
                         .multilineTextAlignment(.leading)
@@ -43,6 +55,6 @@ struct EventPreview: View {
 struct EventPreview_Previews: PreviewProvider {
     static var data = DataModel()
     static var previews: some View {
-        EventPreview(eventPreview: data.eventPreviews[0])
+        EventPreview(eventPreview: data.eventPreviews[2])
     }
 }

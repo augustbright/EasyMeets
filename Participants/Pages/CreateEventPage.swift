@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct CreateEventPage: View {
+    @State private var title = ""
+    @State private var description = ""
     var body: some View {
-        Text("Create a new event...")
+        VStack {
+            Text("Create a new event...").font(.title)
+                TextField("Title", text: $title)
+                .textFieldStyle(.roundedBorder)
+                TextEditor(text: $description)
+            
+            Button("Submit") {
+                
+            }
+        }
+        .padding(.horizontal)
     }
 }
 

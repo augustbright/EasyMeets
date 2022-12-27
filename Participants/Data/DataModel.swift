@@ -10,6 +10,7 @@ import Combine
 
 final class DataModel: ObservableObject {
     @Published var eventPreviews: [EventPreviewData] = load("Event previews.json")
+    @Published var communities: [CommunityModel] = load("Communities.json")
 }
 
 func load<T: Decodable>(_ filename: String) -> T {
