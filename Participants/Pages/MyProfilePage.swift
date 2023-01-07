@@ -6,15 +6,40 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct MyProfilePage: View {
+    @EnvironmentObject var userManager: UserManager
+
     var body: some View {
-        Text("My Profile")
+        VStack { 
+            if let currentUser = userManager.user {
+                if let email = currentUser.email {
+                    Text(email)
+                }
+                Button("Sign out") {
+                    logout()
+                }
+                .buttonStyle(.bordered)
+            } else {
+                LoginPage() {
+                    Text("Sign in to see your profile here")
+                }
+            }
+        }
+    }
+    
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+        }
     }
 }
 
 struct MyProfilePage_Previews: PreviewProvider {
     static var previews: some View {
         MyProfilePage()
+            .environmentObject(UserManager(autoLogin: true))
     }
 }

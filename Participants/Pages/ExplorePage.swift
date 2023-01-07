@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 enum ButtonKind {
     case regular, prominent
@@ -28,10 +29,9 @@ struct ExplorePage: View {
     enum Category {
         case events, communities
     }
-
-    @EnvironmentObject var data: DataModel
+    
     @State private var category: Category = .events
-
+    
     var body: some View {
         VStack {
             HStack {
@@ -41,7 +41,7 @@ struct ExplorePage: View {
                     Label("Events", systemImage: "party.popper")
                 }
                 .buttonKind(category == .events ? .prominent : .regular)
-                    
+                
                 Button {
                     category = .communities
                 } label: {
@@ -58,12 +58,11 @@ struct ExplorePage: View {
                 ExploreCommunitiesView()
             }
         }
-    }
+    }    
 }
 
 struct ExplorePage_Previews: PreviewProvider {
     static var previews: some View {
         ExplorePage()
-            .environmentObject(DataModel())
     }
 }
