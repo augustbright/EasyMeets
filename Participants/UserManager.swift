@@ -10,8 +10,6 @@ import FirebaseAuth
 import SwiftUI
 import Firebase
 
-let autoLogin = false
-
 class UserManager: ObservableObject {
     @Published var user: User?
     @Published var userInfo: UserInfoModel?
@@ -23,12 +21,6 @@ class UserManager: ObservableObject {
     private let db = Firestore.firestore()
     
     init() {
-        if autoLogin {
-            self.signIn(withEmail: "", password: "") {
-                _, _ in
-            }
-        }
-
         listen()
     }
     

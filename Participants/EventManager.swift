@@ -11,12 +11,18 @@ import FirebaseCore
 import Firebase
 
 class EventManager: ObservableObject {
-    func createEvent(_ model: EventModel, completion: ((Error?) -> Void)?) -> String {
+    func createEvent(_ model: EventModel, completion: @escaping (String?, Error?) -> Void) {
         let db = Firestore.firestore()
         let data = EventManager.dataFromEvent(model)
-        let newEventRef = db.collection("Events").addDocument(data: data, completion: completion)
-
-        return newEventRef.documentID
+        var newEventRef: DocumentReference?
+        newEventRef = db.collection("Events").addDocument(data: data) {
+            error in
+            guard error == nil else {
+                completion(nil, error)
+                return
+            }
+            completion(newEventRef!.documentID, nil)
+        }
     }
     
     static func dataFromEvent(_ model: EventModel) -> [String: Any] {

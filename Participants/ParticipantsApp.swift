@@ -7,11 +7,9 @@
 
 import SwiftUI
 import FirebaseCore
-import FirebaseAuth
 
 @main
 struct ParticipantsApp: App {
-    @StateObject var locationManager = LocationManager()
     @StateObject var userManager = UserManager()
     @StateObject var eventManager = EventManager()
     
@@ -22,7 +20,6 @@ struct ParticipantsApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(locationManager)
                 .environmentObject(userManager)
                 .environmentObject(eventManager)
         }

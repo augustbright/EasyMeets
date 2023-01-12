@@ -57,13 +57,14 @@
 		024C653D295A0B4900C6E581 /* CommunityPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C653C295A0B4900C6E581 /* CommunityPreview.swift */; };
 		024C653F295A271200C6E581 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C653E295A271200C6E581 /* FavoriteButton.swift */; };
 		024C6541295B583200C6E581 /* ImageDataPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C6540295B583200C6E581 /* ImageDataPicker.swift */; };
-		024C6546295B768300C6E581 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C6545295B768300C6E581 /* LocationManager.swift */; };
 		024C654A295CD56400C6E581 /* SignInPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C6549295CD56400C6E581 /* SignInPage.swift */; };
 		024C654C295F4B8000C6E581 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C654B295F4B8000C6E581 /* UserManager.swift */; };
 		024C6550295F629800C6E581 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C654F295F629800C6E581 /* EventManager.swift */; };
 		024C6552295F62D000C6E581 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C6551295F62D000C6E581 /* EventModel.swift */; };
 		0266F30029707A04009F4F55 /* RichTextKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0266F2FF29707A04009F4F55 /* RichTextKit */; };
 		0266F3032970844C009F4F55 /* FormValidator in Frameworks */ = {isa = PBXBuildFile; productRef = 0266F3022970844C009F4F55 /* FormValidator */; };
+		0266F30629709539009F4F55 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 0266F30529709539009F4F55 /* PopupView */; };
+		0266F30929709C91009F4F55 /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0266F30829709C91009F4F55 /* ConfettiSwiftUI */; };
 		02A5BF53296C712500FD171B /* CommunityPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5BF52296C712500FD171B /* CommunityPicker.swift */; };
 		02A5BF55296C730A00FD171B /* CommunitiesPickerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5BF54296C730A00FD171B /* CommunitiesPickerList.swift */; };
 		02A5BF57296C875200FD171B /* ExploreEventsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5BF56296C875200FD171B /* ExploreEventsPage.swift */; };
@@ -121,7 +122,6 @@
 		024C653E295A271200C6E581 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		024C6540295B583200C6E581 /* ImageDataPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataPicker.swift; sourceTree = "<group>"; };
 		024C6544295B75A300C6E581 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		024C6545295B768300C6E581 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		024C6549295CD56400C6E581 /* SignInPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPage.swift; sourceTree = "<group>"; };
 		024C654B295F4B8000C6E581 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		024C654F295F629800C6E581 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
@@ -155,6 +155,7 @@
 				021E16B3295F690400CC85EA /* FirebaseAppCheck in Frameworks */,
 				021E16B1295F690400CC85EA /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				0266F30029707A04009F4F55 /* RichTextKit in Frameworks */,
+				0266F30629709539009F4F55 /* PopupView in Frameworks */,
 				021E16B7295F690400CC85EA /* FirebaseAuth in Frameworks */,
 				021E16BB295F690400CC85EA /* FirebaseCrashlytics in Frameworks */,
 				021E16DB295F690400CC85EA /* FirebaseRemoteConfigSwift in Frameworks */,
@@ -171,6 +172,7 @@
 				021E16C1295F690400CC85EA /* FirebaseDynamicLinks in Frameworks */,
 				021E16C5295F690400CC85EA /* FirebaseFirestoreCombine-Community in Frameworks */,
 				021E16D5295F690400CC85EA /* FirebaseMessaging in Frameworks */,
+				0266F30929709C91009F4F55 /* ConfettiSwiftUI in Frameworks */,
 				021E16D1295F690400CC85EA /* FirebaseInstallations in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -223,7 +225,6 @@
 				024C64D62958AFAE00C6E581 /* ParticipantsApp.swift */,
 				024C64DA2958AFAF00C6E581 /* Assets.xcassets */,
 				024C64DC2958AFAF00C6E581 /* Preview Content */,
-				024C6545295B768300C6E581 /* LocationManager.swift */,
 				024C654B295F4B8000C6E581 /* UserManager.swift */,
 				024C654F295F629800C6E581 /* EventManager.swift */,
 				02B4919B2969DED500C5A066 /* CommunityManager.swift */,
@@ -350,6 +351,8 @@
 				021E16DE295F690400CC85EA /* FirebaseStorageCombine-Community */,
 				0266F2FF29707A04009F4F55 /* RichTextKit */,
 				0266F3022970844C009F4F55 /* FormValidator */,
+				0266F30529709539009F4F55 /* PopupView */,
+				0266F30829709C91009F4F55 /* ConfettiSwiftUI */,
 			);
 			productName = Participants;
 			productReference = 024C64D32958AFAE00C6E581 /* Participants.app */;
@@ -427,6 +430,8 @@
 				021E16A9295F690400CC85EA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				0266F2FE29707A03009F4F55 /* XCRemoteSwiftPackageReference "RichTextKit" */,
 				0266F3012970844C009F4F55 /* XCRemoteSwiftPackageReference "SwiftUIFormValidator" */,
+				0266F30429709539009F4F55 /* XCRemoteSwiftPackageReference "PopupView" */,
+				0266F30729709C91009F4F55 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
 			);
 			productRefGroup = 024C64D42958AFAE00C6E581 /* Products */;
 			projectDirPath = "";
@@ -488,7 +493,6 @@
 				024C64D92958AFAE00C6E581 /* ContentView.swift in Sources */,
 				024C65372959FDC600C6E581 /* ExploreCommunitiesView.swift in Sources */,
 				02C8DD76296F259300CE0160 /* UpcomingEventsView.swift in Sources */,
-				024C6546295B768300C6E581 /* LocationManager.swift in Sources */,
 				02A5BF57296C875200FD171B /* ExploreEventsPage.swift in Sources */,
 				02C8DD7C296F44D600CE0160 /* ManageEvent.swift in Sources */,
 				024C650A2958B4B900C6E581 /* EventPage.swift in Sources */,
@@ -857,6 +861,22 @@
 				minimumVersion = 0.9.0;
 			};
 		};
+		0266F30429709539009F4F55 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		0266F30729709C91009F4F55 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1004,6 +1024,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0266F3012970844C009F4F55 /* XCRemoteSwiftPackageReference "SwiftUIFormValidator" */;
 			productName = FormValidator;
+		};
+		0266F30529709539009F4F55 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0266F30429709539009F4F55 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
+		};
+		0266F30829709C91009F4F55 /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0266F30729709C91009F4F55 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

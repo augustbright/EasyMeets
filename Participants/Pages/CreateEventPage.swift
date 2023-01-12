@@ -11,6 +11,8 @@ import MapKit
 import FirebaseStorage
 import Firebase
 import FormValidator
+import PopupView
+import ConfettiSwiftUI
 
 class EventFormInfo: ObservableObject {
     @Published var title: String = ""
@@ -53,7 +55,6 @@ extension Location {
 }
 
 struct CreateEventPage: View {
-    @EnvironmentObject var locationManager: LocationManager;
     @EnvironmentObject var userManager: UserManager;
     @ObservedObject var formInfo = EventFormInfo()
 
@@ -95,6 +96,11 @@ struct CreateEventPage: View {
     @State private var eventType: EventType = .Personal
         
     @State private var description = ""
+    
+    @State private var isSaving = false
+    @State private var confetties: Int = 0
+    @State private var eventId: String?
+    @State private var showingSuccessPopup = false
         
     var body: some View {
         WithUser {
@@ -166,32 +172,57 @@ struct CreateEventPage: View {
                         .lineLimit(2...)
                 }
             }
+            .disabled(isSaving || eventId != nil)
             .navigationTitle("Create a new event")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button("Save") {
-                        save()
+                        self.isSaving = true
+                        self.confetties += 1
+                        save() {
+                            eventId, error in
+                            self.isSaving = false
+                            guard error == nil else {
+                                return
+                            }
+                            self.eventId = eventId
+                            self.showingSuccessPopup = true
+                        }
                     }
                     .buttonStyle(.borderedProminent)
-                    .disabled(!formInfo.form.allValid)
+                    .disabled(!formInfo.form.allValid || isSaving || eventId != nil)
+                    .confettiCannon(counter: $confetties, num: 60, openingAngle: Angle.degrees(150), closingAngle: Angle.degrees(300))
                 }
+            }
+            .popup(isPresented: $showingSuccessPopup) {
+                HStack {
+                    Text("Congratulations!🎉")
+                }
+                .frame(width: 200, height: 60)
+                .background(Color(red: 0.85, green: 0.8, blue: 0.95))
+                .cornerRadius(30.0)
+
+            } customize: {
+                $0.animation(.easeOut)
+                    .isOpaque(true)
+                    .closeOnTapOutside(true)
+                    .closeOnTap(false)
             }
         }
     }
     
-    private func save() {
+    private func save(completion: @escaping (String?, Error?) -> Void) {
         uploadPhoto() {
             (url, error) in
             guard error == nil else {
+                completion(nil, error)
                 return
             }
-            uploadModel(photoUrl: url) {
-                error in
-            }
+            uploadModel(photoUrl: url, completion: completion)
         }
     }
     
-    private func uploadModel(photoUrl: String?, completion: @escaping ((Error?) -> Void)) {
+    private func uploadModel(photoUrl: String?, completion: @escaping ((String?, Error?) -> Void)) {
         if let authorId = userManager.user?.uid {
             let eventModel = EventModel(
                 title: formInfo.title,
@@ -207,7 +238,7 @@ struct CreateEventPage: View {
                 peopleAttending: [],
                 peopleThinking: []
             );
-            docId = EventManager().createEvent(eventModel, completion: completion)
+            EventManager().createEvent(eventModel, completion: completion)
         }
     }
     
@@ -240,7 +271,6 @@ struct CreateEventPage_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             CreateEventPage()
-                .environmentObject(LocationManager(mock: true))
                 .environmentObject(UserManager())
         }
     }
