@@ -40,6 +40,6 @@ struct MyProfilePage: View {
 struct MyProfilePage_Previews: PreviewProvider {
     static var previews: some View {
         MyProfilePage()
-            .environmentObject(UserManager(autoLogin: true))
+            .environmentObject(UserManager())
     }
 }

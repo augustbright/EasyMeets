@@ -33,30 +33,16 @@ struct ExplorePage: View {
     @State private var category: Category = .events
     
     var body: some View {
-        VStack {
-            HStack {
-                Button {
-                    category = .events
-                } label: {
-                    Label("Events", systemImage: "party.popper")
+        NavigationStack {
+            List () {
+                NavigationLink("Events") {
+                    ExploreEventsPage()
                 }
-                .buttonKind(category == .events ? .prominent : .regular)
-                
-                Button {
-                    category = .communities
-                } label: {
-                    Label("Communities", systemImage: "person.3.fill")
+                NavigationLink("Communities") {
+                    ExploreCommunitiesView()
                 }
-                .buttonKind(category == .communities ? .prominent : .regular)
             }
-            .buttonBorderShape(.capsule)
-            
-            switch category {
-            case .events:
-                ExploreEventsView()
-            case .communities:
-                ExploreCommunitiesView()
-            }
+            .navigationTitle("Explore")
         }
     }    
 }
@@ -64,5 +50,6 @@ struct ExplorePage: View {
 struct ExplorePage_Previews: PreviewProvider {
     static var previews: some View {
         ExplorePage()
+            .environmentObject(UserManager())
     }
 }

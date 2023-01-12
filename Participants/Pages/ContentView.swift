@@ -16,7 +16,7 @@ struct ContentView: View {
                     }
                 ExplorePage()
                     .tabItem {
-                        Label("Explore", systemImage: "list.bullet.below.rectangle")
+                        Label("Explore", systemImage: "star")
                     }
                 MyProfilePage()
                     .tabItem {
@@ -29,7 +29,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(DataModel())
-            .environmentObject(UserManager(autoLogin: false))
+            .environmentObject(UserManager())
     }
 }

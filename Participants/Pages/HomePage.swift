@@ -8,23 +8,20 @@
 import SwiftUI
 
 struct HomePage: View {
-    @EnvironmentObject var data: DataModel;
-    
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading) {
+            List {
                 HStack {
-                    Text("Upcoming events")
-                        .font(.headline)
                     NavigationLink {
                         CreateEventPage()
                     } label: {
                         Label("Create event", systemImage: "plus.app")
-                            .labelStyle(.iconOnly)
                     }
                     Spacer()
                 }
-                Spacer()
+                Section("Your upcoming events") {
+                    UpcomingEventsView()
+                }
             }
         }
     }
@@ -33,6 +30,6 @@ struct HomePage: View {
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {
         HomePage()
-            .environmentObject(DataModel())
+            .environmentObject(UserManager())
     }
 }

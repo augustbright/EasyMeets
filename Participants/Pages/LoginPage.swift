@@ -13,6 +13,9 @@ struct LoginPage<Content: View>: View {
 
     var body: some View {
         VStack {
+            HStack {
+                Spacer()
+            }
             VStack(content: content)
             Button {
                 isLoginModalShown = true

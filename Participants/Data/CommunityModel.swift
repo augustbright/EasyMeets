@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct CommunityModel: Codable, Identifiable {
-    var id: Int;
+struct CommunityModel: Codable, Identifiable, Hashable {
+    var id: String?;
+    var authorId: String;
     var name: String;
-    var about: String;
-    var followers: Int;
-    var image: String;
-    var isFollowed: Bool;
+    var description: String;
+    var followers: [String];
+    var image: String?;
 }

@@ -13,8 +13,8 @@ struct FavoriteButton: View {
         Button {
             isSet.toggle()
         } label: {
-            Label("Toggle favorite", systemImage: isSet ? "star.fill" : "star")
-                .foregroundColor(isSet ? .yellow : .gray)
+            Label("Toggle favorite", systemImage: isSet ? "heart.fill" : "heart")
+                .foregroundColor(isSet ? .red : .gray)
                 .labelStyle(.iconOnly)
         }
     }

@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct CreateCommunityPage: View {
-    @EnvironmentObject var data: DataModel
+    @EnvironmentObject var userManager: UserManager
     @State private var title = ""
     @State private var description = ""
     
@@ -36,15 +37,19 @@ struct CreateCommunityPage: View {
     }
     
     func publish() {
-        var communityId = data.communities.last?.id ?? 0 + 1
-    
-        data.communities.append(CommunityModel(id: communityId, name: title, about: description, followers: 0, image: "", isFollowed: false))
+        guard let user = userManager.user else {
+            return
+        }
+        let db = Firestore.firestore()
+        let data = CommunityManager.dataFromCommunity(CommunityModel(authorId: user.uid, name: title, description: description, followers: []))
+        let newCommunityRef = db.collection("Communities").addDocument(data: data) {
+            _ in
+        }
     }
 }
 
 struct CreateCommunityPage_Previews: PreviewProvider {
     static var previews: some View {
         CreateCommunityPage()
-            .environmentObject(DataModel())
     }
 }

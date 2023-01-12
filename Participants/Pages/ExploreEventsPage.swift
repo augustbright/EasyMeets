@@ -1,47 +1,48 @@
 //
-//  ExploreEventsView.swift
+//  ExploreEventsPage.swift
 //  Participants
 //
-//  Created by Валерий Бубенщиков on 26.12.2022.
+//  Created by Валерий Бубенщиков on 09.01.2023.
 //
 
 import SwiftUI
 import Firebase
 
-struct ExploreEventsView: View {
+struct ExploreEventsPage: View {
     @State private var searchText = ""
     @State private var filterFavorite = false
     @State private var events: [EventModel]?
-        
+    
     var body: some View {
         VStack {
             if let events = events {
-                NavigationStack() {
-                    List(events) { event in
+                List(events) { event in
+                    Section {
                         NavigationLink  {
                             EventPage(eventId: event.id!)
                         } label: {
                             EventPreview(eventPreview: event)
                         }
                     }
-                    .navigationTitle(filterFavorite ? "Events (saved)" : "Events")
-                    .toolbar {
-                        ToolbarItem {
-                            FavoriteButton(isSet: $filterFavorite)
-                        }
-                    }
-                    .searchable(text: $searchText)
                 }
+                .navigationTitle(filterFavorite ? "Events (saved)" : "Events")
+                .toolbar {
+                    ToolbarItem {
+                        FavoriteButton(isSet: $filterFavorite)
+                    }
+                }
+                .searchable(text: $searchText)
             }
         }
         .onAppear() {
             self.fetchEvents()
         }
     }
-
+    
     func fetchEvents() {
         let db = Firestore.firestore()
         let collection = db.collection("Events")
+        
         collection.addSnapshotListener() {
             (querySnapshot, error) in
             guard error == nil else {
@@ -54,8 +55,9 @@ struct ExploreEventsView: View {
     }
 }
 
-struct ExploreEventsView_Previews: PreviewProvider {
+struct ExploreEventsPage_Previews: PreviewProvider {
     static var previews: some View {
-        ExploreEventsView()
+        ExploreEventsPage()
+            .environmentObject(UserManager())
     }
 }

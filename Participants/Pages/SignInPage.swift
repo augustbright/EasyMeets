@@ -12,10 +12,10 @@ struct SignInPage: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var activeTab: String = "signIn"
-    @State private var errorMessage: String? = nil
-    @State private var isLoading: Bool = false
     
     @Binding var isPresented: Bool
+    
+    @EnvironmentObject private var userManager: UserManager
     
     var body: some View {
         TabView(selection: $activeTab) {
@@ -23,8 +23,8 @@ struct SignInPage: View {
                 Section(header: Text("By email")) {
                     VStack(alignment: .leading, spacing: 8.0) {
                         Text("Enter your email and password")
-                        if let errorMessage = errorMessage {
-                            Text(errorMessage)
+                        if let error = userManager.error {
+                            Text(error.localizedDescription)
                                 .foregroundColor(.red)
                         }
                     }
@@ -32,7 +32,7 @@ struct SignInPage: View {
                     SecureField("Password", text: $password)
                     HStack {
                         
-                        if isLoading {
+                        if userManager.isLoading {
                             ProgressView()
                                 .frame(height: 34)
                         } else {
@@ -49,7 +49,7 @@ struct SignInPage: View {
                                 activeTab = "forgot"
                             }
                         }
-                            .buttonStyle(.borderless)
+                        .buttonStyle(.borderless)
                     }
                     .padding(.vertical)
                 }
@@ -86,19 +86,17 @@ struct SignInPage: View {
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         .scrollDisabled(true)
-
+        
     }
     
     func login() {
-        isLoading = true
-        Auth.auth().signIn(withEmail: email, password: password) {
+        userManager.signIn(withEmail: email, password: password) {
             (result, error) in
-            isLoading = false;
             guard error == nil else {
-                errorMessage = error?.localizedDescription
                 return
             }
-            errorMessage = nil
+            email = ""
+            password = ""
             isPresented = false
         }
     }
@@ -107,5 +105,6 @@ struct SignInPage: View {
 struct SignInPage_Previews: PreviewProvider {
     static var previews: some View {
         SignInPage(isPresented: .constant(true))
+            .environmentObject(UserManager())
     }
 }

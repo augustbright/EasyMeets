@@ -49,16 +49,11 @@
 		024C650E2958B57700C6E581 /* CreateCommunityPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C650D2958B57700C6E581 /* CreateCommunityPage.swift */; };
 		024C65102958B5A100C6E581 /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C650F2958B5A100C6E581 /* WelcomePage.swift */; };
 		024C65132958B68100C6E581 /* EventPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C65122958B68100C6E581 /* EventPreview.swift */; };
-		024C65182958BF6300C6E581 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C65172958BF6300C6E581 /* DataModel.swift */; };
-		024C651A2958C05800C6E581 /* EventPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C65192958C05800C6E581 /* EventPreviewData.swift */; };
-		024C651C2958C96B00C6E581 /* Event previews.json in Resources */ = {isa = PBXBuildFile; fileRef = 024C651B2958C96B00C6E581 /* Event previews.json */; };
 		024C652029599E2D00C6E581 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 024C651F29599E2D00C6E581 /* GoogleService-Info.plist */; };
 		024C65312959A60F00C6E581 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C65302959A60F00C6E581 /* LoginPage.swift */; };
 		024C65332959F27600C6E581 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C65322959F27600C6E581 /* HomePage.swift */; };
-		024C65352959FDB800C6E581 /* ExploreEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C65342959FDB800C6E581 /* ExploreEventsView.swift */; };
 		024C65372959FDC600C6E581 /* ExploreCommunitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C65362959FDC600C6E581 /* ExploreCommunitiesView.swift */; };
 		024C6539295A0A9A00C6E581 /* CommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C6538295A0A9A00C6E581 /* CommunityModel.swift */; };
-		024C653B295A0B0500C6E581 /* Communities.json in Resources */ = {isa = PBXBuildFile; fileRef = 024C653A295A0B0500C6E581 /* Communities.json */; };
 		024C653D295A0B4900C6E581 /* CommunityPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C653C295A0B4900C6E581 /* CommunityPreview.swift */; };
 		024C653F295A271200C6E581 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C653E295A271200C6E581 /* FavoriteButton.swift */; };
 		024C6541295B583200C6E581 /* ImageDataPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C6540295B583200C6E581 /* ImageDataPicker.swift */; };
@@ -67,6 +62,18 @@
 		024C654C295F4B8000C6E581 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C654B295F4B8000C6E581 /* UserManager.swift */; };
 		024C6550295F629800C6E581 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C654F295F629800C6E581 /* EventManager.swift */; };
 		024C6552295F62D000C6E581 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C6551295F62D000C6E581 /* EventModel.swift */; };
+		0266F30029707A04009F4F55 /* RichTextKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0266F2FF29707A04009F4F55 /* RichTextKit */; };
+		0266F3032970844C009F4F55 /* FormValidator in Frameworks */ = {isa = PBXBuildFile; productRef = 0266F3022970844C009F4F55 /* FormValidator */; };
+		02A5BF53296C712500FD171B /* CommunityPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5BF52296C712500FD171B /* CommunityPicker.swift */; };
+		02A5BF55296C730A00FD171B /* CommunitiesPickerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5BF54296C730A00FD171B /* CommunitiesPickerList.swift */; };
+		02A5BF57296C875200FD171B /* ExploreEventsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5BF56296C875200FD171B /* ExploreEventsPage.swift */; };
+		02A5BF59296DEBE600FD171B /* EventControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5BF58296DEBE600FD171B /* EventControlsView.swift */; };
+		02B4919C2969DED500C5A066 /* CommunityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B4919B2969DED500C5A066 /* CommunityManager.swift */; };
+		02C8DD74296DF26E00CE0160 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C8DD73296DF26E00CE0160 /* UserInfoModel.swift */; };
+		02C8DD76296F259300CE0160 /* UpcomingEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C8DD75296F259300CE0160 /* UpcomingEventsView.swift */; };
+		02C8DD78296F269E00CE0160 /* WithUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C8DD77296F269E00CE0160 /* WithUser.swift */; };
+		02C8DD7A296F3F3C00CE0160 /* EventPreviewSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C8DD79296F3F3C00CE0160 /* EventPreviewSmall.swift */; };
+		02C8DD7C296F44D600CE0160 /* ManageEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C8DD7B296F44D600CE0160 /* ManageEvent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,16 +112,11 @@
 		024C650D2958B57700C6E581 /* CreateCommunityPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommunityPage.swift; sourceTree = "<group>"; };
 		024C650F2958B5A100C6E581 /* WelcomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePage.swift; sourceTree = "<group>"; };
 		024C65122958B68100C6E581 /* EventPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPreview.swift; sourceTree = "<group>"; };
-		024C65172958BF6300C6E581 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		024C65192958C05800C6E581 /* EventPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPreviewData.swift; sourceTree = "<group>"; };
-		024C651B2958C96B00C6E581 /* Event previews.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Event previews.json"; sourceTree = "<group>"; };
 		024C651F29599E2D00C6E581 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		024C65302959A60F00C6E581 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		024C65322959F27600C6E581 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
-		024C65342959FDB800C6E581 /* ExploreEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreEventsView.swift; sourceTree = "<group>"; };
 		024C65362959FDC600C6E581 /* ExploreCommunitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCommunitiesView.swift; sourceTree = "<group>"; };
 		024C6538295A0A9A00C6E581 /* CommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModel.swift; sourceTree = "<group>"; };
-		024C653A295A0B0500C6E581 /* Communities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Communities.json; sourceTree = "<group>"; };
 		024C653C295A0B4900C6E581 /* CommunityPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPreview.swift; sourceTree = "<group>"; };
 		024C653E295A271200C6E581 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		024C6540295B583200C6E581 /* ImageDataPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataPicker.swift; sourceTree = "<group>"; };
@@ -124,6 +126,16 @@
 		024C654B295F4B8000C6E581 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		024C654F295F629800C6E581 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		024C6551295F62D000C6E581 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
+		02A5BF52296C712500FD171B /* CommunityPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPicker.swift; sourceTree = "<group>"; };
+		02A5BF54296C730A00FD171B /* CommunitiesPickerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunitiesPickerList.swift; sourceTree = "<group>"; };
+		02A5BF56296C875200FD171B /* ExploreEventsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreEventsPage.swift; sourceTree = "<group>"; };
+		02A5BF58296DEBE600FD171B /* EventControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventControlsView.swift; sourceTree = "<group>"; };
+		02B4919B2969DED500C5A066 /* CommunityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityManager.swift; sourceTree = "<group>"; };
+		02C8DD73296DF26E00CE0160 /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
+		02C8DD75296F259300CE0160 /* UpcomingEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingEventsView.swift; sourceTree = "<group>"; };
+		02C8DD77296F269E00CE0160 /* WithUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithUser.swift; sourceTree = "<group>"; };
+		02C8DD79296F3F3C00CE0160 /* EventPreviewSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPreviewSmall.swift; sourceTree = "<group>"; };
+		02C8DD7B296F44D600CE0160 /* ManageEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageEvent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,10 +149,12 @@
 				021E16AF295F690400CC85EA /* FirebaseAnalyticsSwift in Frameworks */,
 				021E16AB295F690400CC85EA /* FirebaseAnalytics in Frameworks */,
 				021E16AD295F690400CC85EA /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				0266F3032970844C009F4F55 /* FormValidator in Frameworks */,
 				021E16D3295F690400CC85EA /* FirebaseMLModelDownloader in Frameworks */,
 				021E16C7295F690400CC85EA /* FirebaseFirestoreSwift in Frameworks */,
 				021E16B3295F690400CC85EA /* FirebaseAppCheck in Frameworks */,
 				021E16B1295F690400CC85EA /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				0266F30029707A04009F4F55 /* RichTextKit in Frameworks */,
 				021E16B7295F690400CC85EA /* FirebaseAuth in Frameworks */,
 				021E16BB295F690400CC85EA /* FirebaseCrashlytics in Frameworks */,
 				021E16DB295F690400CC85EA /* FirebaseRemoteConfigSwift in Frameworks */,
@@ -212,6 +226,7 @@
 				024C6545295B768300C6E581 /* LocationManager.swift */,
 				024C654B295F4B8000C6E581 /* UserManager.swift */,
 				024C654F295F629800C6E581 /* EventManager.swift */,
+				02B4919B2969DED500C5A066 /* CommunityManager.swift */,
 			);
 			path = Participants;
 			sourceTree = "<group>";
@@ -255,6 +270,7 @@
 				024C65302959A60F00C6E581 /* LoginPage.swift */,
 				024C65322959F27600C6E581 /* HomePage.swift */,
 				024C6549295CD56400C6E581 /* SignInPage.swift */,
+				02A5BF56296C875200FD171B /* ExploreEventsPage.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -263,11 +279,17 @@
 			isa = PBXGroup;
 			children = (
 				024C65122958B68100C6E581 /* EventPreview.swift */,
-				024C65342959FDB800C6E581 /* ExploreEventsView.swift */,
 				024C65362959FDC600C6E581 /* ExploreCommunitiesView.swift */,
 				024C653C295A0B4900C6E581 /* CommunityPreview.swift */,
 				024C653E295A271200C6E581 /* FavoriteButton.swift */,
 				024C6540295B583200C6E581 /* ImageDataPicker.swift */,
+				02A5BF52296C712500FD171B /* CommunityPicker.swift */,
+				02A5BF54296C730A00FD171B /* CommunitiesPickerList.swift */,
+				02A5BF58296DEBE600FD171B /* EventControlsView.swift */,
+				02C8DD75296F259300CE0160 /* UpcomingEventsView.swift */,
+				02C8DD77296F269E00CE0160 /* WithUser.swift */,
+				02C8DD79296F3F3C00CE0160 /* EventPreviewSmall.swift */,
+				02C8DD7B296F44D600CE0160 /* ManageEvent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -275,12 +297,9 @@
 		024C65162958BF4100C6E581 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				024C653A295A0B0500C6E581 /* Communities.json */,
-				024C651B2958C96B00C6E581 /* Event previews.json */,
-				024C65172958BF6300C6E581 /* DataModel.swift */,
-				024C65192958C05800C6E581 /* EventPreviewData.swift */,
 				024C6538295A0A9A00C6E581 /* CommunityModel.swift */,
 				024C6551295F62D000C6E581 /* EventModel.swift */,
+				02C8DD73296DF26E00CE0160 /* UserInfoModel.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -329,6 +348,8 @@
 				021E16DA295F690400CC85EA /* FirebaseRemoteConfigSwift */,
 				021E16DC295F690400CC85EA /* FirebaseStorage */,
 				021E16DE295F690400CC85EA /* FirebaseStorageCombine-Community */,
+				0266F2FF29707A04009F4F55 /* RichTextKit */,
+				0266F3022970844C009F4F55 /* FormValidator */,
 			);
 			productName = Participants;
 			productReference = 024C64D32958AFAE00C6E581 /* Participants.app */;
@@ -404,6 +425,8 @@
 			mainGroup = 024C64CA2958AFAE00C6E581;
 			packageReferences = (
 				021E16A9295F690400CC85EA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				0266F2FE29707A03009F4F55 /* XCRemoteSwiftPackageReference "RichTextKit" */,
+				0266F3012970844C009F4F55 /* XCRemoteSwiftPackageReference "SwiftUIFormValidator" */,
 			);
 			productRefGroup = 024C64D42958AFAE00C6E581 /* Products */;
 			projectDirPath = "";
@@ -424,8 +447,6 @@
 				024C64DE2958AFAF00C6E581 /* Preview Assets.xcassets in Resources */,
 				024C652029599E2D00C6E581 /* GoogleService-Info.plist in Resources */,
 				024C64DB2958AFAF00C6E581 /* Assets.xcassets in Resources */,
-				024C653B295A0B0500C6E581 /* Communities.json in Resources */,
-				024C651C2958C96B00C6E581 /* Event previews.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,30 +472,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				024C65042958B22200C6E581 /* ExplorePage.swift in Sources */,
-				024C65352959FDB800C6E581 /* ExploreEventsView.swift in Sources */,
-				024C651A2958C05800C6E581 /* EventPreviewData.swift in Sources */,
 				024C653F295A271200C6E581 /* FavoriteButton.swift in Sources */,
 				024C6539295A0A9A00C6E581 /* CommunityModel.swift in Sources */,
 				024C6550295F629800C6E581 /* EventManager.swift in Sources */,
 				024C65082958B49A00C6E581 /* CreateEventPage.swift in Sources */,
 				024C654C295F4B8000C6E581 /* UserManager.swift in Sources */,
 				024C6552295F62D000C6E581 /* EventModel.swift in Sources */,
-				024C65182958BF6300C6E581 /* DataModel.swift in Sources */,
 				024C653D295A0B4900C6E581 /* CommunityPreview.swift in Sources */,
+				02A5BF55296C730A00FD171B /* CommunitiesPickerList.swift in Sources */,
 				024C65312959A60F00C6E581 /* LoginPage.swift in Sources */,
 				024C650E2958B57700C6E581 /* CreateCommunityPage.swift in Sources */,
 				024C65132958B68100C6E581 /* EventPreview.swift in Sources */,
+				02C8DD7A296F3F3C00CE0160 /* EventPreviewSmall.swift in Sources */,
 				024C65102958B5A100C6E581 /* WelcomePage.swift in Sources */,
 				024C64D92958AFAE00C6E581 /* ContentView.swift in Sources */,
 				024C65372959FDC600C6E581 /* ExploreCommunitiesView.swift in Sources */,
+				02C8DD76296F259300CE0160 /* UpcomingEventsView.swift in Sources */,
 				024C6546295B768300C6E581 /* LocationManager.swift in Sources */,
+				02A5BF57296C875200FD171B /* ExploreEventsPage.swift in Sources */,
+				02C8DD7C296F44D600CE0160 /* ManageEvent.swift in Sources */,
 				024C650A2958B4B900C6E581 /* EventPage.swift in Sources */,
+				02C8DD74296DF26E00CE0160 /* UserInfoModel.swift in Sources */,
+				02B4919C2969DED500C5A066 /* CommunityManager.swift in Sources */,
 				024C654A295CD56400C6E581 /* SignInPage.swift in Sources */,
 				024C65332959F27600C6E581 /* HomePage.swift in Sources */,
 				024C6541295B583200C6E581 /* ImageDataPicker.swift in Sources */,
 				024C65022958B20300C6E581 /* MyProfilePage.swift in Sources */,
 				024C650C2958B53100C6E581 /* CommunityPage.swift in Sources */,
+				02C8DD78296F269E00CE0160 /* WithUser.swift in Sources */,
+				02A5BF53296C712500FD171B /* CommunityPicker.swift in Sources */,
 				024C64D72958AFAE00C6E581 /* ParticipantsApp.swift in Sources */,
+				02A5BF59296DEBE600FD171B /* EventControlsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,6 +841,22 @@
 				kind = branch;
 			};
 		};
+		0266F2FE29707A03009F4F55 /* XCRemoteSwiftPackageReference "RichTextKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielsaidi/RichTextKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.0;
+			};
+		};
+		0266F3012970844C009F4F55 /* XCRemoteSwiftPackageReference "SwiftUIFormValidator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ShabanKamell/SwiftUIFormValidator.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -950,6 +994,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 021E16A9295F690400CC85EA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		0266F2FF29707A04009F4F55 /* RichTextKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0266F2FE29707A03009F4F55 /* XCRemoteSwiftPackageReference "RichTextKit" */;
+			productName = RichTextKit;
+		};
+		0266F3022970844C009F4F55 /* FormValidator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0266F3012970844C009F4F55 /* XCRemoteSwiftPackageReference "SwiftUIFormValidator" */;
+			productName = FormValidator;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

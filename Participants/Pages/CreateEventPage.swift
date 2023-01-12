@@ -9,100 +9,177 @@ import SwiftUI
 import PhotosUI
 import MapKit
 import FirebaseStorage
+import Firebase
+import FormValidator
+
+class EventFormInfo: ObservableObject {
+    @Published var title: String = ""
+    @Published var startDate: Date = Calendar.current.date(byAdding: DateComponents(day: 1), to: Calendar.current.startOfDay(for: Date.now))!
+    @Published var finishDate: Date = Date.now
+    @Published var hasFinishDate: Bool = false
+    
+    lazy var form = {
+        FormValidation(validationType: .immediate)
+    }()
+
+    lazy var titleValidation: ValidationContainer = {
+        $title.nonEmptyValidator(form: form, errorMessage: "Title cannot be empty")
+    }()
+    
+    lazy var startDateValidation: ValidationContainer = {
+        $startDate.dateValidator(form: form, after: Date.now, errorMessage: "Start time cannot be in the past")
+    }()
+    
+    lazy var finishDateValidation: ValidationContainer = {
+        $finishDate.dateValidator(form: form, after: startDate, errorMessage: "Finish time should be after the start time", disableValidation: {
+            !self.hasFinishDate
+        })
+    }()
+}
+
+struct Location : Identifiable {
+    let id = UUID()
+    let title: String
+    let coordinate: CLLocationCoordinate2D
+}
+
+extension Location {
+    static func getLocations() -> [Location] {
+        return [
+            Location(title: "Custom", coordinate:
+                        CLLocationCoordinate2D(latitude: 41.715137, longitude: 44.807095))
+        ]
+    }
+}
 
 struct CreateEventPage: View {
-    let calendar = Calendar.current
     @EnvironmentObject var locationManager: LocationManager;
     @EnvironmentObject var userManager: UserManager;
-    @State private var title = ""
-    @State private var description = ""
+    @ObservedObject var formInfo = EventFormInfo()
+
+    private var eventDuration: String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.day, .hour, .minute]
+        formatter.unitsStyle = .abbreviated
+        return formatter.string(from: formInfo.startDate, to: formInfo.finishDate) ?? ""
+    }
+    
+    private var defaultFinishTime: Date {
+        var dateComponent = DateComponents()
+        dateComponent.hour = 1
+        return Calendar.current.date(byAdding: dateComponent, to: formInfo.startDate)!
+    }
+
     @State private var photoItem: PhotosPickerItem?
     @State private var photoData: Data?
-    @State private var startDate: Date = Date.now
-    @State private var finishDate: Date = Date.now
-    @State private var hasFinishDate: Bool = false
+    @State private var isPublished: Bool = true
+    @State private var community: CommunityModel?
     
     @State private var docId: String = ""
     
+    @State private var isOnline: Bool = false
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 41.715137, longitude: 44.807095),
         latitudinalMeters: 3000,
         longitudinalMeters: 3000
     )
+    @State private var locations: [Location] = Location.getLocations()
+    @State private var linkToEvent = ""
+    @State private var locationAdditionalInfo = ""
     
+    enum EventType: String, CaseIterable, Identifiable {
+        case Personal, Community
+        var id: Self { self }
+    }
+    
+    @State private var eventType: EventType = .Personal
+        
+    @State private var description = ""
+        
     var body: some View {
-        if userManager.user == nil {
-            LoginPage() {
-                Text("Sign in to create an event")
-            }
-        } else {
-
-                VStack(spacing: 20.0) {
-                    Text("Create a new event...")
-                        .font(.title)
-                    ScrollView {
-                    VStack {
-                        
-                        Text("Event title:").font(.caption)
-                        TextField("Title", text: $title)
-                            .textFieldStyle(.roundedBorder)
-                        
-                        DatePicker(selection: $startDate, label: { Text("Starts") })
-                        
-                        if hasFinishDate {
-                            HStack {
-                                DatePicker(selection: $finishDate, label: { Text("Ends") })
-                                Button {
-                                    hasFinishDate = false
-                                } label: {
-                                    Label("Clear", systemImage: "xmark")
-                                        .labelStyle(.iconOnly)
-                                }
-                            }
-                        } else {
-                            HStack {
-                                Spacer()
-                                Button {
-                                    finishDate = calendar.date(byAdding: .hour, value: 1, to: startDate) ?? Date.now
-                                    hasFinishDate = true
-                                } label: {
-                                    Label("End time", systemImage: "plus")
-                                }
-                            }
+        WithUser {
+            Text("Sign in to create an event")
+        } content: { user, _ in
+            Form {
+                Section("General") {
+                    TextField("Title", text: $formInfo.title)
+                        .validation(formInfo.titleValidation)
+                        .textFieldStyle(.roundedBorder)
+                    Picker("Event type", selection: $eventType) {
+                        Text("Personal").tag(EventType.Personal)
+                        Text("Community").tag(EventType.Community)
+                    }
+                    .onChange(of: eventType) { [eventType] eventType in
+                        if eventType == .Personal {
+                            community = nil
                         }
                     }
-                    
-                    VStack {
-                        Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, userTrackingMode: .none)
-                            .frame(height: 200.0)
+                    if eventType == .Community {
+                        CommunityPicker(community: $community)
                     }
-                    
-                    HStack {
-                        Spacer()
-                        VStack {
-                            ImageDataPicker(photoItem: $photoItem, photoData: $photoData)
+                    Toggle(isOn: $isPublished) {
+                        Text("Public")
+                    }
+                }
+                
+                Section("Time") {
+                    DatePicker(selection: $formInfo.startDate, label: { Text("Starts") })
+                        .validation(formInfo.startDateValidation)
+                        .onChange(of: formInfo.startDate) {
+                            _ in formInfo.finishDate = defaultFinishTime
                         }
-                        Spacer()
+                    Toggle(isOn: $formInfo.hasFinishDate) {
+                        Text("End time")
                     }
-                    .frame(minHeight: photoData == nil ? 200 : nil)
-                    .border(photoData == nil ? .gray : .white)
-                    
-                    Text("About this event:").font(.caption)
-                    TextEditor(text: $description)
-                        .frame(minHeight: 150)
-                        .border(.gray)
-                    
-                    Button("Submit") {
-                        createEvent()
+                    if formInfo.hasFinishDate {
+                        DatePicker(selection: $formInfo.finishDate, label: { Text("Ends") })
+                            .validation(formInfo.finishDateValidation)
+                        LabeledContent("Duration", value: eventDuration)
                     }
-                    .buttonStyle(.borderedProminent)
+                }
+                
+                Section("Location") {
+                    Toggle(isOn: $isOnline) {
+                        Text("Online")
+                    }
+                    if !isOnline {
+                        Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, userTrackingMode: .none, annotationItems: locations) {
+                            (location) -> MapPin in MapPin(coordinate: region.center)
+                        }
+                        .frame(height: 200.0)
+                        
+                    } else {
+                        HStack {
+                            TextField("Link to event", text: $linkToEvent)
+                        }
+                    }
+                    TextField("Additional info", text: $locationAdditionalInfo, axis: .vertical)
+                        .lineLimit(2...)
+                }
+                
+                Section("Picture") {
+                    ImageDataPicker(photoItem: $photoItem, photoData: $photoData)
+                }
+                
+                Section("About this event") {
+                    TextField("About this event...", text: $locationAdditionalInfo, axis: .vertical)
+                        .lineLimit(2...)
                 }
             }
-            .padding(.horizontal)
+            .navigationTitle("Create a new event")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Save") {
+                        save()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(!formInfo.form.allValid)
+                }
+            }
         }
     }
     
-    private func createEvent() {
+    private func save() {
         uploadPhoto() {
             (url, error) in
             guard error == nil else {
@@ -115,16 +192,18 @@ struct CreateEventPage: View {
     }
     
     private func uploadModel(photoUrl: String?, completion: @escaping ((Error?) -> Void)) {
-        if let authorId = userManager.user?.uid, let photoUrl = photoUrl {
+        if let authorId = userManager.user?.uid {
             let eventModel = EventModel(
-                title: title,
+                title: formInfo.title,
                 description: description,
                 imagePreview: photoUrl,
-                startDate: startDate.ISO8601Format(),
+                startDate: formInfo.startDate.ISO8601Format(),
+                finishDate: formInfo.finishDate.ISO8601Format(),
                 address: "",
                 longtitude: region.center.longitude,
                 latitude: region.center.latitude,
                 authorId: authorId,
+                communityId: community?.id,
                 peopleAttending: [],
                 peopleThinking: []
             );
@@ -141,14 +220,14 @@ struct CreateEventPage: View {
             let imageRef = storageRef.child(imagePath)
             let metadata = StorageMetadata()
             metadata.contentType = "image/png"
-
+            
             let uploadTask = imageRef.putData(photoData, metadata: metadata) { (metadata, error) in
                 guard error == nil else {
                     completion(nil, error)
                     return
                 }
                 completion(imagePath, nil)
-
+                
             }
         } else {
             completion(nil, nil)
@@ -159,8 +238,10 @@ struct CreateEventPage: View {
 
 struct CreateEventPage_Previews: PreviewProvider {
     static var previews: some View {
-        CreateEventPage()
-            .environmentObject(LocationManager(mock: true))
-            .environmentObject(UserManager(autoLogin: true))
+        NavigationStack {
+            CreateEventPage()
+                .environmentObject(LocationManager(mock: true))
+                .environmentObject(UserManager())
+        }
     }
 }

@@ -11,23 +11,11 @@ struct CommunityPreview: View {
     var community: CommunityModel
     var body: some View {
         HStack {
-            AsyncImage(
-                url: URL(string:community.image),
-                            content: { image in
-                                image.resizable()
-                                     .aspectRatio(contentMode: .fit)
-                                     .frame(width: 160, height: 160)
-                            },
-                            placeholder: {
-                                ProgressView()
-                                    .frame(width: 160.0, height: 160.0)
-                            }
-            )
             VStack(alignment: .leading) {
                 Text(community.name)
                     .font(.title)
-                Text("Followers: \(community.followers)")
-                Text(community.about)
+                Text("Followers: \(community.followers.count)")
+                Text(community.description)
                     .font(.body)
                     .fontWeight(.light)
                     .padding(.top)
@@ -40,8 +28,7 @@ struct CommunityPreview: View {
 }
 
 struct CommunityPreview_Previews: PreviewProvider {
-    static var data = DataModel()
     static var previews: some View {
-        CommunityPreview(community: data.communities[0])
+        CommunityPreview(community: CommunityModel(authorId: "", name: "Awesome community", description: "Join us! JOIN", followers: []))
     }
 }

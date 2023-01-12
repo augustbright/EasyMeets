@@ -6,27 +6,54 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ExploreCommunitiesView: View {
-    @EnvironmentObject var data: DataModel
+    @State private var communities: [CommunityModel]?
     
     var body: some View {
-            NavigationStack() {
-                List(data.communities) { community in
-                    NavigationLink  {
-                        CommunityPage(community: community)
-                    } label: {
-                        CommunityPreview(community: community)
+        NavigationStack() {
+            VStack {
+                NavigationLink {
+                    CreateCommunityPage()
+                } label: {
+                    Label("Create new community", systemImage: "plus")
+                }
+                if let communities = communities {
+                    List(communities) { community in
+                        NavigationLink  {
+                            CommunityPage(communityId: community.id!)
+                        } label: {
+                            CommunityPreview(community: community)
+                        }
                     }
                 }
-                .navigationTitle("Communities")
             }
+            .navigationTitle("Communities")
+        }
+        .onAppear() {
+            fetchCommunities()
+        }
+    }
+    
+    func fetchCommunities() {
+        let db = Firestore.firestore()
+        let collection = db.collection("Communities")
+        collection.addSnapshotListener() {
+            (querySnapshot, error) in
+            guard error == nil else {
+                return
+            }
+            self.communities = querySnapshot!.documents.map() {
+                document in CommunityManager.communityFromData(document.data(), document.documentID)
+            }
+        }
     }
 }
 
 struct ExploreCommunitiesView_Previews: PreviewProvider {
     static var previews: some View {
         ExploreCommunitiesView()
-            .environmentObject(DataModel())
+            .environmentObject(UserManager())
     }
 }

@@ -15,40 +15,15 @@ struct EventPage: View {
     @State private var error: Error?
     @State private var event: EventModel?
     @State private var imageUrl: URL?
-    
+
     var body: some View {
-        ScrollView() {
-            HStack {
-                Spacer()
-            }
-            if let error = error {
-                Text(error.localizedDescription)
-            }
-            if let event  = event {
-                if let imageUrl = imageUrl {
-                    AsyncImage(
-                        url: imageUrl,
-                        content: { image in
-                            image.resizable()
-                                .aspectRatio(contentMode: .fit)
-                        },
-                        placeholder: {
-                            HStack {
-                                Spacer()
-                                ProgressView()
-                                Spacer()
-                            }
-                        }
-                    )
-                    .frame(maxHeight: 300)
-                    .background(Color(.secondarySystemBackground))
-                    .clipped()
-                    
-                }
-                
-                VStack(alignment: .leading) {
+        
+        List() {
+            if let event = event {
+                Section(header: VStack(alignment: .leading) {
                     Text(event.title)
                         .font(.title3)
+                        .foregroundColor(.black)
                         .fontWeight(.semibold)
                         .multilineTextAlignment(.leading)
                         .padding(.bottom, 4.0)
@@ -61,31 +36,49 @@ struct EventPage: View {
                     }
                     Text(event.address)
                         .foregroundColor(Color.gray)
-
-                    Divider()
-
-                    HStack(alignment: .top) {
-                        VStack(alignment: .leading) {
-                            Text(event.description)
-                                .multilineTextAlignment(.leading)
-                        }
+                }) {
+                    if let imageUrl = imageUrl {
+                        AsyncImage(
+                            url: imageUrl,
+                            content: { image in
+                                image.resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            },
+                            placeholder: {
+                                HStack {
+                                    Spacer()
+                                    ProgressView()
+                                    Spacer()
+                                }
+                            }
+                        )
+                        .background(Color(.secondarySystemBackground))
+                        .clipped()
+                        
                     }
                     
-                }
-                .padding([.top, .leading, .trailing])
-            } else {
-                Spacer()
-                HStack {
-                    Spacer()
-                    ProgressView("Loading event")
-                    Spacer()
+                    Text(event.description)
+                        .multilineTextAlignment(.leading)
                 }
             }
-            Spacer()
+            else {
+               HStack {
+                   Spacer()
+                   ProgressView("Loading event")
+                   Spacer()
+               }
+               .onAppear() {
+                   self.fetchEvent(eventId)
+               }
+           }
         }
-        .onAppear() {
-            self.fetchEvent(eventId)
+        .listStyle(.plain)
+        .toolbar {
+            ToolbarItem(placement: .bottomBar) {
+                EventControlsView(eventId: eventId)
+            }
         }
+
     }
     
     func fetchEvent(_ eventId: String) {
@@ -99,7 +92,7 @@ struct EventPage: View {
             }
             if let document, document.exists, let data = document.data() {
                 self.event = EventManager.eventFromData(data, document.documentID)
-                
+
                 if let image = event?.imagePreview {
                     let storageRef = Storage.storage().reference()
                     let imageRef = storageRef.child(image)
@@ -120,9 +113,10 @@ struct EventPage: View {
 }
 
 struct EventPage_Previews: PreviewProvider {
-    static var data = DataModel()
     static var previews: some View {
-        EventPage(eventId: "ErWgEodvZnMgQ20MDgR0")
-            .environmentObject(data)
+        NavigationStack {
+            EventPage(eventId: "ErWgEodvZnMgQ20MDgR0")
+                .environmentObject(UserManager())
+        }
     }
 }

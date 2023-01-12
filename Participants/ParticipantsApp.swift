@@ -11,7 +11,6 @@ import FirebaseAuth
 
 @main
 struct ParticipantsApp: App {
-    @StateObject var data = DataModel()
     @StateObject var locationManager = LocationManager()
     @StateObject var userManager = UserManager()
     @StateObject var eventManager = EventManager()
@@ -23,7 +22,6 @@ struct ParticipantsApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(data)
                 .environmentObject(locationManager)
                 .environmentObject(userManager)
                 .environmentObject(eventManager)

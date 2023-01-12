@@ -50,6 +50,5 @@ class EventManager: ObservableObject {
             peopleAttending: data["peopleAttending"] as! [String],
             peopleThinking: data["peopleThinking"] as! [String]
         )
-
     }
 }
