@@ -23,8 +23,10 @@ struct EventPreview: View {
                 Text(eventPreview.startDateFormatted!, style: .date)
                 Text(eventPreview.startDateFormatted!, style: .time)
             }
-            Text(eventPreview.address)
-                .foregroundColor(Color.gray)
+            if let address = eventPreview.address {
+                Text(address)
+                    .foregroundColor(Color.gray)
+            }
 
             ZStack {
                 if let imageUrl = imageUrl {
@@ -62,7 +64,7 @@ struct EventPreview: View {
     }
     
     func fetchImageUrl() {
-        if let image = eventPreview.imagePreview {
+        if let image = eventPreview.image {
             let storageRef = Storage.storage().reference()
             let imageRef = storageRef.child(image)
             
@@ -80,6 +82,6 @@ struct EventPreview: View {
 
 struct EventPreview_Previews: PreviewProvider {
     static var previews: some View {
-        EventPreview(eventPreview: EventModel(title: "Test", description: "Description", imagePreview: "user/oqf0IbCqDfYWwO0pGHaLnH4EYBe2/13C7D6AC-C8C7-40F0-8E2D-BF7B93E0C883.png", startDate: "2023-01-05T18:54:19Z", address: "Pushkin street", authorId: "ErWgEodvZnMgQ20MDgR0", peopleAttending: [], peopleThinking: []))
+        EventPreview(eventPreview: EventModel.mock)
     }
 }

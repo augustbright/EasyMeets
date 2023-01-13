@@ -7,10 +7,13 @@
 
 import SwiftUI
 import Firebase
+import os
 
 struct UpcomingEventsView: View {
     @EnvironmentObject private var userManager: UserManager
     @State private var events: [EventModel]?
+    
+    private let logger = Logger()
     
     var body: some View {
         WithUser {
@@ -25,18 +28,20 @@ struct UpcomingEventsView: View {
                             EventPreviewSmall(eventPreview: event)
                         }
                     }
-                    
+
                     if events.count == 0 {
                         Text("You are not participating in any events")
                             .foregroundColor(.secondary)
                     }
-                }                
+                }
             }
             .onAppear() { fetchUpcomingEvents(userId: user.uid) }
         }
     }
     
     func fetchUpcomingEvents(userId: String) {
+        logger.log("fetching upcoming events")
+
         let db = Firestore.firestore()
         let collection = db.collection("Events").whereField("peopleAttending", arrayContains: userId)
         collection.addSnapshotListener {
@@ -45,7 +50,7 @@ struct UpcomingEventsView: View {
             guard let snapshot else { return }
             
             self.events = snapshot.documents.map() {
-                document in EventManager.eventFromData(document.data(), document.documentID)
+                document in EventModel(data: document.data(), id: document.documentID)
             }
         }
     }

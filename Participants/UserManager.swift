@@ -80,7 +80,8 @@ class UserManager: ObservableObject {
                 self.db.collection("Users").document(userId).setData(UserManager.dataFromUserInfo(UserInfoModel(
                     eventsAttending: [],
                     eventsMaybe: [],
-                    eventsStarred: []
+                    eventsStarred: [],
+                    eventsOwn: []
                 )), completion: completion)
             } else {
                 completion(nil)
@@ -112,16 +113,17 @@ class UserManager: ObservableObject {
         return [
             "eventsAttending": model.eventsAttending,
             "eventsMaybe": model.eventsMaybe,
-            "eventsStarred": model.eventsStarred
+            "eventsStarred": model.eventsStarred,
+            "eventsOwn": model.eventsOwn
         ]
     }
 
-    
     static func userInfoFromData(_ data: [String: Any]) -> UserInfoModel {
         return UserInfoModel(
             eventsAttending: (data["eventsAttending"] ?? []) as! [String],
             eventsMaybe: (data["eventsMaybe"] ?? []) as! [String],
-            eventsStarred: (data["eventsStarred"] ?? []) as! [String]
+            eventsStarred: (data["eventsStarred"] ?? []) as! [String],
+            eventsOwn: (data["eventsOwn"] ?? []) as! [String]
         )
     }
     
@@ -194,4 +196,16 @@ class UserManager: ObservableObject {
         ])
 
     }
+    
+    func ownEvent(eventId: String) {
+        guard let userId = self.user?.uid else {
+            return
+        }
+
+        let userRef = self.db.collection("Users").document(userId)
+        userRef.updateData([
+            "eventsOwn": FieldValue.arrayUnion([eventId])
+        ])
+    }
+
 }

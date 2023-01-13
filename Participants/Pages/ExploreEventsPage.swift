@@ -12,9 +12,13 @@ struct ExploreEventsPage: View {
     @State private var searchText = ""
     @State private var filterFavorite = false
     @State private var events: [EventModel]?
+    @State private var error: Error?
     
     var body: some View {
         VStack {
+            if let error {
+                Text(error.localizedDescription)
+            }
             if let events = events {
                 List(events) { event in
                     Section {
@@ -48,9 +52,9 @@ struct ExploreEventsPage: View {
             guard error == nil else {
                 return
             }
-            self.events = querySnapshot!.documents.map() {
-                document in EventManager.eventFromData(document.data(), document.documentID)
-            }
+                self.events = querySnapshot!.documents.map() {
+                    document in EventModel(data: document.data(), id: document.documentID)
+                }
         }
     }
 }

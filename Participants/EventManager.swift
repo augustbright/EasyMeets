@@ -13,9 +13,8 @@ import Firebase
 class EventManager: ObservableObject {
     func createEvent(_ model: EventModel, completion: @escaping (String?, Error?) -> Void) {
         let db = Firestore.firestore()
-        let data = EventManager.dataFromEvent(model)
         var newEventRef: DocumentReference?
-        newEventRef = db.collection("Events").addDocument(data: data) {
+        newEventRef = db.collection("Events").addDocument(data: model.dictionary) {
             error in
             guard error == nil else {
                 completion(nil, error)
@@ -23,38 +22,5 @@ class EventManager: ObservableObject {
             }
             completion(newEventRef!.documentID, nil)
         }
-    }
-    
-    static func dataFromEvent(_ model: EventModel) -> [String: Any] {
-        return [
-            "authorId": model.authorId,
-            "dateCreated": Timestamp(date: Date()),
-
-            "title": model.title,
-            "description": model.description,
-            "imagePreview": model.imagePreview,
-            "startDate": model.startDate,
-            "finishDate": model.finishDate,
-            "address": model.address,
-            "longtitude": model.longtitude,
-            "latitude": model.latitude,
-            "communityId": model.communityId,
-            "peopleAttending": model.peopleAttending,
-            "peopleThinking": model.peopleThinking
-        ]
-    }
-
-    static func eventFromData(_ data: [String: Any], _ id: String) -> EventModel {
-        return EventModel(
-            id: id,
-            title: data["title"] as! String,
-            description: data["description"] as! String,
-            imagePreview: data["imagePreview"] as? String,
-            startDate: data["startDate"] as! String,
-            address: data["address"] as! String,
-            authorId: data["authorId"] as! String,
-            peopleAttending: data["peopleAttending"] as! [String],
-            peopleThinking: data["peopleThinking"] as! [String]
-        )
     }
 }

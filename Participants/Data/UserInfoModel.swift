@@ -11,4 +11,5 @@ struct UserInfoModel {
     var eventsAttending: [String]
     var eventsMaybe: [String]
     var eventsStarred: [String]
+    var eventsOwn: [String]
 }

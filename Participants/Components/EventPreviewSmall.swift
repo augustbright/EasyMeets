@@ -23,8 +23,10 @@ struct EventPreviewSmall: View {
                 Text(eventPreview.startDateFormatted!, style: .date)
                 Text(eventPreview.startDateFormatted!, style: .time)
             }
-            Text(eventPreview.address)
-                .foregroundColor(Color.gray)
+            if let address = eventPreview.address {
+                Text(address)
+                    .foregroundColor(Color.gray)
+            }
             EventControlsView(eventId: eventPreview.id!)
         }
         .onAppear() {
@@ -33,7 +35,7 @@ struct EventPreviewSmall: View {
     }
     
     func fetchImageUrl() {
-        if let image = eventPreview.imagePreview {
+        if let image = eventPreview.image {
             let storageRef = Storage.storage().reference()
             let imageRef = storageRef.child(image)
             
@@ -51,8 +53,7 @@ struct EventPreviewSmall: View {
 
 struct EventPreviewSmall_Previews: PreviewProvider {
     static var previews: some View {
-        EventPreviewSmall(eventPreview: EventModel(id: "", title: "Test", description: "Description", imagePreview: "user/oqf0IbCqDfYWwO0pGHaLnH4EYBe2/13C7D6AC-C8C7-40F0-8E2D-BF7B93E0C883.png", startDate: "2023-01-05T18:54:19Z", address: "Pushkin street", authorId: "ErWgEodvZnMgQ20MDgR0", peopleAttending: [], peopleThinking: []))
-            .environmentObject(UserManager())
+        EventPreviewSmall(eventPreview: EventModel.mock)
         
     }
 }

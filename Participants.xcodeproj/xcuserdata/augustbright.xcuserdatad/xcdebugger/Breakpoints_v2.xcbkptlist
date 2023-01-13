@@ -36,53 +36,5 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1AFE033B-FA92-49A4-BE48-3FB3FF505739"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Participants/Pages/CreateEventPage.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
-            landmarkName = "uploadModel(photoUrl:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1AFE033B-FA92-49A4-BE48-3FB3FF505739 - c157a6342615c4cf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Participants.CreateEventPage.uploadPhoto(completion: (Swift.Optional&lt;Foundation.URL&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Participants"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/augustbright/Documents/repo/Participants/Participants/Pages/CreateEventPage.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "136"
-                  endingLineNumber = "136"
-                  offsetFromSymbolStart = "796">
-               </Location>
-               <Location
-                  uuid = "1AFE033B-FA92-49A4-BE48-3FB3FF505739 - 127cad0410af6a0b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Participants.CreateEventPage.__preview__uploadPhoto(completion: (Swift.Optional&lt;Foundation.URL&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "CreateEventPage.1.preview-thunk.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/augustbright/Documents/repo/Participants/Participants/Pages/CreateEventPage.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "136"
-                  endingLineNumber = "136"
-                  offsetFromSymbolStart = "1516">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

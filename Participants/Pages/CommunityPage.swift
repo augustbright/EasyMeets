@@ -82,7 +82,7 @@ struct CommunityPage: View {
                 return
             }
             self.events = querySnapshot!.documents.map() {
-                document in EventManager.eventFromData(document.data(), document.documentID)
+                document in EventModel(data: document.data(), id: document.documentID)
             }
         }
     }
