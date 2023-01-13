@@ -9,9 +9,10 @@ import SwiftUI
 import PhotosUI
 
 struct ImageDataPicker: View {
-    @Binding var photoItem: PhotosPickerItem?
     @Binding var photoData: Data?
-    
+
+    @State private var photoItem: PhotosPickerItem?
+
     var body: some View {
         VStack {
             if let photoData,
@@ -47,6 +48,6 @@ struct ImageDataPicker: View {
 
 struct ImageDataPicker_Previews: PreviewProvider {
     static var previews: some View {
-        ImageDataPicker(photoItem: .constant(nil), photoData: .constant(nil))
+        ImageDataPicker(photoData: .constant(nil))
     }
 }

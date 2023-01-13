@@ -10,6 +10,8 @@ import Firebase
 
 struct EventControlsView: View {
     var eventId: String
+    var onEdit: () -> Void
+
     @EnvironmentObject private var userManager: UserManager
     private var isStarred: Bool? {
         guard let userInfo = userManager.userInfo else {
@@ -18,11 +20,23 @@ struct EventControlsView: View {
         return userInfo.eventsStarred.contains(eventId)
     }
     
+    private var isOwner: Bool? {
+        guard let userInfo = userManager.userInfo else {
+            return nil
+        }
+        return userInfo.eventsOwn.contains(eventId)
+    }
+    
     var body: some View {
         VStack {
             if let userInfo = userManager.userInfo {
                 HStack {
-                    if (userInfo.eventsAttending.contains(eventId)) {
+                    if isOwner == true {
+                        Spacer()
+                        Button("Edit") {
+                            onEdit()
+                        }
+                    } else if (userInfo.eventsAttending.contains(eventId)) {
                         Text("✅ You are attending")
                             .bold()
                         changeDecision
@@ -42,8 +56,7 @@ struct EventControlsView: View {
                         .buttonStyle(.bordered)
                     }
                     
-                    if let isStarred {
-                        Spacer()
+                    if let isStarred, isOwner != true {
                         Button {
                             userManager.toggleStarEvent(eventId: eventId, isSet: !isStarred)
                         } label: {
@@ -76,7 +89,7 @@ struct EventControlsView: View {
 
 struct EventControlsView_Previews: PreviewProvider {
     static var previews: some View {
-        EventControlsView(eventId: "ErWgEodvZnMgQ20MDgR0")
+        EventControlsView(eventId: "J4fs1BWJYdrdjuuYlDf2") {}
             .environmentObject(UserManager())
     }
 }

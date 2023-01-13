@@ -72,6 +72,8 @@
 		02B4919C2969DED500C5A066 /* CommunityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B4919B2969DED500C5A066 /* CommunityManager.swift */; };
 		02BD4AD62971B5960056EF4F /* NewEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD4AD52971B5960056EF4F /* NewEventView.swift */; };
 		02BD4AD82971B7280056EF4F /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD4AD72971B7280056EF4F /* EventView.swift */; };
+		02BD4ADA2971CF300056EF4F /* EditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD4AD92971CF300056EF4F /* EditEventView.swift */; };
+		02BD4ADC2971D1940056EF4F /* ReadEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD4ADB2971D1940056EF4F /* ReadEventView.swift */; };
 		02C8DD74296DF26E00CE0160 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C8DD73296DF26E00CE0160 /* UserInfoModel.swift */; };
 		02C8DD76296F259300CE0160 /* UpcomingEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C8DD75296F259300CE0160 /* UpcomingEventsView.swift */; };
 		02C8DD78296F269E00CE0160 /* WithUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C8DD77296F269E00CE0160 /* WithUser.swift */; };
@@ -134,6 +136,8 @@
 		02B4919B2969DED500C5A066 /* CommunityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityManager.swift; sourceTree = "<group>"; };
 		02BD4AD52971B5960056EF4F /* NewEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventView.swift; sourceTree = "<group>"; };
 		02BD4AD72971B7280056EF4F /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
+		02BD4AD92971CF300056EF4F /* EditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventView.swift; sourceTree = "<group>"; };
+		02BD4ADB2971D1940056EF4F /* ReadEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadEventView.swift; sourceTree = "<group>"; };
 		02C8DD73296DF26E00CE0160 /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		02C8DD75296F259300CE0160 /* UpcomingEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingEventsView.swift; sourceTree = "<group>"; };
 		02C8DD77296F269E00CE0160 /* WithUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithUser.swift; sourceTree = "<group>"; };
@@ -294,6 +298,8 @@
 				02C8DD79296F3F3C00CE0160 /* EventPreviewSmall.swift */,
 				02BD4AD52971B5960056EF4F /* NewEventView.swift */,
 				02BD4AD72971B7280056EF4F /* EventView.swift */,
+				02BD4AD92971CF300056EF4F /* EditEventView.swift */,
+				02BD4ADB2971D1940056EF4F /* ReadEventView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -493,10 +499,12 @@
 				024C65312959A60F00C6E581 /* LoginPage.swift in Sources */,
 				024C650E2958B57700C6E581 /* CreateCommunityPage.swift in Sources */,
 				024C65132958B68100C6E581 /* EventPreview.swift in Sources */,
+				02BD4ADA2971CF300056EF4F /* EditEventView.swift in Sources */,
 				02C8DD7A296F3F3C00CE0160 /* EventPreviewSmall.swift in Sources */,
 				024C65102958B5A100C6E581 /* WelcomePage.swift in Sources */,
 				024C64D92958AFAE00C6E581 /* ContentView.swift in Sources */,
 				024C65372959FDC600C6E581 /* ExploreCommunitiesView.swift in Sources */,
+				02BD4ADC2971D1940056EF4F /* ReadEventView.swift in Sources */,
 				02C8DD76296F259300CE0160 /* UpcomingEventsView.swift in Sources */,
 				02A5BF57296C875200FD171B /* ExploreEventsPage.swift in Sources */,
 				024C650A2958B4B900C6E581 /* EventPage.swift in Sources */,

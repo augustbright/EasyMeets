@@ -20,14 +20,14 @@ struct EventPreviewSmall: View {
                 .multilineTextAlignment(.leading)
             
             HStack {
-                Text(eventPreview.startDateFormatted!, style: .date)
-                Text(eventPreview.startDateFormatted!, style: .time)
+                Text(eventPreview.startDateFormatted, style: .date)
+                Text(eventPreview.startDateFormatted, style: .time)
             }
             if let address = eventPreview.address {
                 Text(address)
                     .foregroundColor(Color.gray)
             }
-            EventControlsView(eventId: eventPreview.id!)
+            EventControlsView(eventId: eventPreview.id!) {}
         }
         .onAppear() {
             fetchImageUrl()

@@ -27,7 +27,7 @@ struct EventPage: View {
     func fetchEvent(_ eventId: String) {
         let db = Firestore.firestore()
         let eventRef = db.collection("Events").document(eventId)
-        eventRef.getDocument() {
+        eventRef.addSnapshotListener() {
             (document, error) in
             guard error == nil else {
                 self.error = error

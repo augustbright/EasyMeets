@@ -11,7 +11,7 @@ import Firebase
 struct CommunitiesPickerList: View {
     @EnvironmentObject var userManager: UserManager
     @State private var communities: [CommunityModel]?
-    @Binding var community: CommunityModel?
+    @Binding var community: CommunityPickerItem?
     @Binding var isShown: Bool
     
     var body: some View {
@@ -25,7 +25,7 @@ struct CommunitiesPickerList: View {
                 if let communities = communities {
                     List(communities) { community in
                         Button(community.name) {
-                            self.community = community
+                            self.community = CommunityPickerItem(id: community.id!, name: community.name)
                             self.isShown = false
                         }
                     }

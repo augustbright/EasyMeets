@@ -15,3 +15,8 @@ struct CommunityModel: Codable, Identifiable, Hashable {
     var followers: [String];
     var image: String?;
 }
+
+struct CommunityPickerItem: Identifiable {
+    var id: String;
+    var name: String;
+}

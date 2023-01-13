@@ -85,7 +85,6 @@ struct EventModel: Identifiable {
     
     var dictionary: [String: Any] {
         return [
-            "id": id,
             "title": title,
             "dateCreated": Timestamp(date: Date()),
 
@@ -115,11 +114,17 @@ struct EventModel: Identifiable {
         ]
     }
     
-    var startDateFormatted: Date? {
+    var startDateFormatted: Date {
         let newFormatter = ISO8601DateFormatter()
-        return newFormatter.date(from: startDate)
+        return newFormatter.date(from: startDate)!
     }
-    
+
+    var finishDateFormatted: Date? {
+        guard let finishDate else { return nil }
+        let newFormatter = ISO8601DateFormatter()
+        return newFormatter.date(from: finishDate)
+    }
+
     static var mock = EventModel(id: "id1", title: "Test", dateCreated: nil, authorId: "ErWgEodvZnMgQ20MDgR0", authorName: "Pushkin", communityId: "09PrhMEmZ4eFmGEeY2D1", communityName: "Swifters", startDate: "2023-01-05T18:54:19Z", finishDate: "2023-01-06T18:54:19Z", image: "user/oqf0IbCqDfYWwO0pGHaLnH4EYBe2/13C7D6AC-C8C7-40F0-8E2D-BF7B93E0C883.png", isOnline: false, longtitude: 44.802095, latitude:  41.715137, address: "Pushkin street", eventLink: "https://google.com", locationAdditionalInfo: "Station square", description: "An awesome event", published: true, peopleAttending: [], peopleThinking: [])
 
 }
