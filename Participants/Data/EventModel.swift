@@ -33,11 +33,12 @@ struct EventModel: Identifiable {
     var description: String
     
     var published: Bool
+    var deleted: Bool?
 
     var peopleAttending: [String]
     var peopleThinking: [String]
     
-    init(id: String? = nil, title: String, dateCreated: String? = nil, authorId: String, authorName: String, communityId: String? = nil, communityName: String? = nil, startDate: String, finishDate: String? = nil, image: String? = nil, isOnline: Bool, longtitude: Double? = nil, latitude: Double? = nil, address: String? = nil, eventLink: String? = nil, locationAdditionalInfo: String, description: String, published: Bool, peopleAttending: [String], peopleThinking: [String]) {
+    init(id: String? = nil, title: String, dateCreated: String? = nil, authorId: String, authorName: String, communityId: String? = nil, communityName: String? = nil, startDate: String, finishDate: String? = nil, image: String? = nil, isOnline: Bool, longtitude: Double? = nil, latitude: Double? = nil, address: String? = nil, eventLink: String? = nil, locationAdditionalInfo: String, description: String, published: Bool, deleted: Bool, peopleAttending: [String], peopleThinking: [String]) {
         self.id = id
         self.title = title
         self.dateCreated = dateCreated
@@ -56,6 +57,7 @@ struct EventModel: Identifiable {
         self.locationAdditionalInfo = locationAdditionalInfo
         self.description = description
         self.published = published
+        self.deleted = deleted
         self.peopleAttending = peopleAttending
         self.peopleThinking = peopleThinking
     }
@@ -79,6 +81,7 @@ struct EventModel: Identifiable {
         self.locationAdditionalInfo = data["locationAdditionalInfo"] as! String
         self.description = data["description"] as! String
         self.published = data["published"] as! Bool
+        self.deleted = data["deleted"] as? Bool
         self.peopleAttending = data["peopleAttending"] as! [String]
         self.peopleThinking = data["peopleThinking"] as! [String]
     }
@@ -108,8 +111,9 @@ struct EventModel: Identifiable {
             "description": description,
 
             "published": published,
+            "deleted": deleted,
             "peopleAttending": peopleAttending,
-            "peopleThinking": peopleThinking
+            "peopleThinking": peopleThinking,
 
         ]
     }
@@ -125,6 +129,6 @@ struct EventModel: Identifiable {
         return newFormatter.date(from: finishDate)
     }
 
-    static var mock = EventModel(id: "id1", title: "Test", dateCreated: nil, authorId: "ErWgEodvZnMgQ20MDgR0", authorName: "Pushkin", communityId: "09PrhMEmZ4eFmGEeY2D1", communityName: "Swifters", startDate: "2023-01-05T18:54:19Z", finishDate: "2023-01-06T18:54:19Z", image: "user/oqf0IbCqDfYWwO0pGHaLnH4EYBe2/13C7D6AC-C8C7-40F0-8E2D-BF7B93E0C883.png", isOnline: false, longtitude: 44.802095, latitude:  41.715137, address: "Pushkin street", eventLink: "https://google.com", locationAdditionalInfo: "Station square", description: "An awesome event", published: true, peopleAttending: [], peopleThinking: [])
+    static var mock = EventModel(id: "id1", title: "Test", dateCreated: nil, authorId: "ErWgEodvZnMgQ20MDgR0", authorName: "Pushkin", communityId: "09PrhMEmZ4eFmGEeY2D1", communityName: "Swifters", startDate: "2023-01-05T18:54:19Z", finishDate: "2023-01-06T18:54:19Z", image: "user/oqf0IbCqDfYWwO0pGHaLnH4EYBe2/13C7D6AC-C8C7-40F0-8E2D-BF7B93E0C883.png", isOnline: false, longtitude: 44.802095, latitude:  41.715137, address: "Pushkin street", eventLink: "https://google.com", locationAdditionalInfo: "Station square", description: "An awesome event", published: true, deleted: false, peopleAttending: [], peopleThinking: [])
 
 }

@@ -188,6 +188,23 @@ struct EditEventView: View {
                     .buttonStyle(.borderedProminent)
                     .disabled(!formInfo.form.allValid || isSaving)
                 }
+
+                if let originalEvent, let eventId = originalEvent.id {
+                    ToolbarItem(placement: .secondaryAction) {
+                        Button("Delete event", role: .destructive) {
+                            EventManager.deleteEvent(eventId) {
+                                error in
+                                guard error == nil else {
+                                    onFinish(nil, error)
+                                    return
+                                }
+                                var deletedEvent = EventModel(data: originalEvent.dictionary, id: eventId)
+                                deletedEvent.deleted = true
+                                onFinish(deletedEvent, nil)
+                            }
+                        }
+                    }
+                }
             }
             .onAppear { initEventForm() }
         }
@@ -274,16 +291,17 @@ struct EditEventView: View {
                 description: description,
 
                 published: isPublished,
+                deleted: false,
                 peopleAttending: [],
                 peopleThinking: []
             );
-            EventManager().saveEvent(eventModel) {
+            EventManager().saveEvent(eventModel, id: originalEvent?.id) {
                 eventId, error in
                 guard error == nil else {
                     completion(nil, error)
                     return
                 }
-                eventModel.id = eventId
+                eventModel.id = originalEvent?.id
                 userManager.ownEvent(eventId: eventId!)
                 completion(eventModel, nil)
             }

@@ -16,10 +16,15 @@ struct EventView: View {
     @State private var actualEvent: EventModel?
     @State private var isEditing = false
     @State private var error: Error?
-        
+
     var body: some View {
         VStack {
-            if let actualEvent, !isEditing {
+            if actualEvent?.deleted == true {
+                Text("👀")
+                Text("This event is deleted")
+                    .foregroundColor(.secondary)
+                    .navigationTitle("")
+            } else if let actualEvent, !isEditing {
                 ReadEventView(event: actualEvent) {
                     isEditing = true
                 }
