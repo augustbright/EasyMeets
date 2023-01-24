@@ -6,7 +6,9 @@
 //
 
 import SwiftUI
-import FirebaseCore
+import Firebase
+import FirebaseFirestore
+import FirebaseStorage
 
 @main
 struct ParticipantsApp: App {
@@ -14,6 +16,15 @@ struct ParticipantsApp: App {
     @StateObject var eventManager = EventManager()
     
     init() {
+//        let settings = Firestore.firestore().settings
+//        settings.host = "localhost:8080"
+//        settings.isPersistenceEnabled = false
+//        settings.isSSLEnabled = false
+//        Firestore.firestore().settings = settings
+//
+//        Auth.auth().useEmulator(withHost:"localhost", port:9099)
+//        Storage.storage().useEmulator(withHost:"localhost", port:9199)
+
         FirebaseApp.configure()
     }
 

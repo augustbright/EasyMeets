@@ -110,7 +110,6 @@ struct EditEventView: View {
                 Section("General") {
                     TextField("Title", text: $formInfo.title)
                         .validation(formInfo.titleValidation)
-                        .textFieldStyle(.roundedBorder)
                     Picker("Event type", selection: $eventType) {
                         Text("Personal").tag(EventType.Personal)
                         Text("Community").tag(EventType.Community)

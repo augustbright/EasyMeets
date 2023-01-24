@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "watercolor-prehistoric-plants-stock-illustrations_csp54865952.jpeg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "watercolor-prehistoric-plants-stock-illustrations_csp54865952 1.jpeg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "watercolor-prehistoric-plants-stock-illustrations_csp54865952 2.jpeg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

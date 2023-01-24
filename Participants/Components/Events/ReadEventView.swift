@@ -27,7 +27,7 @@ struct ReadEventView: View {
             Section(header: VStack(alignment: .leading) {
                 Text(event.title)
                     .font(.title3)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color.primary)
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.leading)
                     .padding(.bottom, 4.0)
