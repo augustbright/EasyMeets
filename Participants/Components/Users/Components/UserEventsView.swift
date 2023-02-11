@@ -9,7 +9,26 @@ import SwiftUI
 
 struct UserEventsView: View {
     var body: some View {
-        Text("User events")
+        List {
+            Section {
+                EventPreview(eventPreview: EventModel.mock)
+                EventPreview(eventPreview: EventModel.mock)
+            } header: {
+                Text("Today")
+            }
+            
+            Section {
+                EventPreview(eventPreview: EventModel.mock)
+            } header: {
+                Text("Tomorrow")
+            }
+
+            Section {
+                EventPreview(eventPreview: EventModel.mock)
+            } header: {
+                Text("On this week")
+            }
+        }
     }
 }
 

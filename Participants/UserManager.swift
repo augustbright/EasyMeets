@@ -62,40 +62,15 @@ class UserManager: ObservableObject {
     }
     
     private func ensureUserInfo(completion: @escaping ((Error?) -> Void)) {
-        self.message = "Ensuring"
-        
         if let userInfoListeningRegistration {
             userInfoListeningRegistration.remove()
         }
         guard let userId = self.user?.uid else {
             return
         }
-        self.message = "got userId"
-        let userRef = self.db.collection("Users").document(userId)
-        userRef.getDocument() {
-            (document, error) in
-            self.message = "got user document"
-            if let document, !document.exists {
-                self.message = "user doesn't exist"
-                self.db.collection("Users").document(userId).setData(UserManager.dataFromUserInfo(UserInfoModel(
-                    displayName: "",
-                    bio: "",
-                    interests: [],
-                    subscribers: [],
-                    invitations: [],
-                    eventsAttending: [],
-                    eventsMaybe: [],
-                    eventsStarred: [],
-                    eventsOwn: [],
-                    communitiesOwn: [],
-                    usersSubscribtions: [],
-                    communitiesSubscribtions: [],
-                    usersBlackList: [],
-                    communitiesBlackList: []
-                )), completion: completion)
-            } else {
-                completion(nil)
-            }
+        
+        UserManager.createUserInfo(userId: userId, displayName: self.user?.displayName ?? "") {
+            error, message in completion(error)
         }
     }
     
@@ -119,9 +94,46 @@ class UserManager: ObservableObject {
         }
     }
     
+    static func createUserInfo(userId: String, displayName: String, completion: @escaping ((Error?, String?) -> Void)) {
+        let db = Firestore.firestore()
+        let userRef = db.collection("Users").document(userId)
+        
+        userRef.getDocument() {
+            (document, error) in
+            if document == nil || !(document!.exists) {
+                db.collection("Users").document(userId).setData(UserManager.dataFromUserInfo(UserInfoModel(
+                    displayName: displayName,
+                    bio: "",
+                    interests: [],
+                    subscribers: [],
+                    invitations: [],
+                    eventsAttending: [],
+                    eventsMaybe: [],
+                    eventsStarred: [],
+                    eventsOwn: [],
+                    communitiesOwn: [],
+                    usersSubscriptions: [],
+                    communitiesSubscriptions: [],
+                    usersBlackList: [],
+                    communitiesBlackList: []
+                ))) {
+                    error in
+                    if error != nil {
+                        completion(error, "user info document is not created")
+                    } else {
+                        completion(error, "user info document is created")
+                    }
+                }
+            } else {
+                completion(nil, "Didn't create. document is nil: \(document == nil), document exists: \(document?.exists)")
+            }
+        }
+    }
+    
     static func dataFromUserInfo(_ model: UserInfoModel) -> [String: Any] {
         return [
             "displayName": model.displayName,
+            "avatar": model.avatar,
             "bio": model.bio,
             "interests": model.interests,
             
@@ -135,8 +147,8 @@ class UserManager: ObservableObject {
             "eventsOwn": model.eventsOwn,
             "communitiesOwn": model.communitiesOwn,
             
-            "usersSubscribtions": model.usersSubscribtions,
-            "communitiesSuibscribtions": model.communitiesSubscribtions,
+            "usersSubscriptions": model.usersSubscriptions,
+            "communitiesSuibscriptions": model.communitiesSubscriptions,
             
             "usersBlackList": model.usersBlackList,
             "communitiesBlackList": model.communitiesBlackList
@@ -146,6 +158,7 @@ class UserManager: ObservableObject {
     static func userInfoFromData(_ data: [String: Any]) -> UserInfoModel {
         return UserInfoModel(
             displayName: data["displayName"] as! String,
+            avatar: data["avatar"] as? String,
             bio: data["bio"] as! String,
             interests: data["interests"] as! [String],
 
@@ -159,8 +172,8 @@ class UserManager: ObservableObject {
             eventsOwn: data["eventsOwn"] as! [String],
             communitiesOwn: data["communitiesOwn"] as! [String],
 
-            usersSubscribtions: data["usersSubscribtions"] as! [String],
-            communitiesSubscribtions: data["communitiesSubscribtions"] as! [String],
+            usersSubscriptions: data["usersSubscriptions"] as! [String],
+            communitiesSubscriptions: data["communitiesSubscriptions"] as! [String],
 
             usersBlackList: data["usersBlackList"] as! [String],
             communitiesBlackList: data["communitiesBlackList"] as! [String]

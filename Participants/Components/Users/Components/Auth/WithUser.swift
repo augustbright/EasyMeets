@@ -23,7 +23,7 @@ struct WithUser<Content: View, Message: View>: View {
             } else if let user = userManager.user, let userInfo = userManager.userInfo {
                 content(user, userInfo)
             } else {
-                LoginPage() {
+                SignUpSignIn() {
                     message()
                 }
             }

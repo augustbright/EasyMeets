@@ -6,24 +6,25 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct MyProfilePage: View {
     @EnvironmentObject var userManager: UserManager
 
     var body: some View {
-        WithUser{
+        WithUser {
             Text("Sign in to see your profile here")
         } content: { user, userInfo in
-            UserPlanView()
+            NavigationStack {
+                UserProfileView(userId: user.uid)
+            }
         }
     }
 }
 
 struct MyProfilePage_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
-            MyProfilePage()
-                .environmentObject(UserManager())
-        }
+        MyProfilePage()
+            .environmentObject(UserManager())
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 import Firebase
 
-struct SignInPage: View {
+struct SignInModal: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var activeTab: String = "signIn"
@@ -102,9 +102,9 @@ struct SignInPage: View {
     }
 }
 
-struct SignInPage_Previews: PreviewProvider {
+struct SignInModal_Previews: PreviewProvider {
     static var previews: some View {
-        SignInPage(isPresented: .constant(true))
+        SignInModal(isPresented: .constant(true))
             .environmentObject(UserManager())
     }
 }

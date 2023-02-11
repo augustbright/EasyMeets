@@ -23,8 +23,8 @@ struct UserInfoModel {
     var eventsOwn: [String]
     var communitiesOwn: [String]
     
-    var usersSubscribtions: [String]
-    var communitiesSubscribtions: [String]
+    var usersSubscriptions: [String]
+    var communitiesSubscriptions: [String]
     var usersBlackList: [String]
     var communitiesBlackList: [String]
 }

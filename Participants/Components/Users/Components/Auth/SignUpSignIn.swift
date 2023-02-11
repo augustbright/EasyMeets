@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct LoginPage<Content: View>: View {
+struct SignUpSignIn<Content: View>: View {
     @State var isLoginModalShown = false
+    @State var isSignUpModalShown = false
     var content: () -> Content
 
     var body: some View {
@@ -25,25 +26,33 @@ struct LoginPage<Content: View>: View {
             .padding(.vertical)
             .buttonStyle(.borderedProminent)
             .sheet(isPresented: $isLoginModalShown) {
-                SignInPage(isPresented: $isLoginModalShown)
+                SignInModal(isPresented: $isLoginModalShown)
             }
 
             Text("Don't have an account yet?")
                 .font(.body)
                 .foregroundColor(.secondary)
-            Button(action: { }) {
+            Button(action: {
+                isSignUpModalShown = true
+            }) {
                 Text("Sign up")
             }
-            
+            .sheet(isPresented: $isSignUpModalShown) {
+                SignUpModal(isPresented: $isSignUpModalShown)
+            }
+
         }
     }
 }
 
-struct LoginPage_Previews: PreviewProvider {
+struct SignUpSignIn_Previews: PreviewProvider {
     static var previews: some View {
-        LoginPage() {
-            Text("Sign in to create an event")
-                .font(.title)
+        NavigationStack {
+            SignUpSignIn() {
+                Text("Sign in to create an event")
+                    .font(.title)
+            }
         }
+        .environmentObject(UserManager())
     }
 }
