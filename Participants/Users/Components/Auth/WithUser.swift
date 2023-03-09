@@ -15,10 +15,7 @@ struct WithUser<Content: View, Message: View>: View {
 
     var body: some View {
         VStack {
-            if let error = userManager.error {
-                Text(error.localizedDescription)
-            }
-            if userManager.isLoading || userManager.user != nil && userManager.userInfo == nil {
+            if userManager.isLoading {
                 ProgressView()
             } else if let user = userManager.user, let userInfo = userManager.userInfo {
                 content(user, userInfo)
@@ -27,7 +24,6 @@ struct WithUser<Content: View, Message: View>: View {
                     message()
                 }
             }
-
         }
     }
 }
@@ -38,7 +34,7 @@ struct WithUser_Previews: PreviewProvider {
             Text("You need to sign in")
         } content: {
             (user, userInfo) in
-            Text("You are signed in as \(user.uid)")
+            Text("You are signed in as \(userInfo.displayName)")
         }
             .environmentObject(UserManager())
     }

@@ -50,30 +50,11 @@ class UserManager: ObservableObject {
                 return
             }
             self.user = user
-            self.ensureUserInfo() {
-                error in
-                guard error == nil else {
-                    self.message = error.debugDescription
-                    return
-                }
-                self.listenUserInfo()
-            }
+            self.message = "displayName: \(user?.displayName)"
+            self.listenUserInfo()
         }
     }
-    
-    private func ensureUserInfo(completion: @escaping ((Error?) -> Void)) {
-        if let userInfoListeningRegistration {
-            userInfoListeningRegistration.remove()
-        }
-        guard let userId = self.user?.uid else {
-            return
-        }
         
-        UserManager.createUserInfo(userId: userId, displayName: self.user?.displayName ?? "") {
-            error, message in completion(error)
-        }
-    }
-    
     private func listenUserInfo() {
         if let userInfoListeningRegistration {
             userInfoListeningRegistration.remove()
@@ -148,7 +129,7 @@ class UserManager: ObservableObject {
             "communitiesOwn": model.communitiesOwn,
             
             "usersSubscriptions": model.usersSubscriptions,
-            "communitiesSuibscriptions": model.communitiesSubscriptions,
+            "communitiesSubscriptions": model.communitiesSubscriptions,
             
             "usersBlackList": model.usersBlackList,
             "communitiesBlackList": model.communitiesBlackList

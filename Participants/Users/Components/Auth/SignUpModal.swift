@@ -98,8 +98,6 @@ struct SignUpModal: View {
 
     var body: some View {
         VStack {
-            Text(message).font(.caption)
-            Text(error ?? "").font(.caption).foregroundColor(.red)
             if !isEmailSent {
                 form
             } else {
@@ -110,11 +108,6 @@ struct SignUpModal: View {
     
     var form: some View {
         Form {
-            if let error {
-                Text(error)
-                    .foregroundColor(.red)
-            }
-
             Section("Email & Name") {
                 LabeledContent("Email") {
                     TextField("Type in your email", text: $formInfo.email)
@@ -186,34 +179,30 @@ struct SignUpModal: View {
                 return
             }
             
-            self.message = "user created"
+            guard let userId = authResult?.user.uid else {
+                return
+            }
             
-            Auth.auth().signIn(withEmail: formInfo.email, password: formInfo.password) {
-                result, error in
-                
+            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+            changeRequest?.displayName = formInfo.displayName
+            changeRequest?.commitChanges { error in
                 guard error == nil else {
                     self.error = error?.localizedDescription
                     self.isLoading = false
                     return
                 }
 
-                self.message = "user authenticated"
-
-                var request = authResult?.user.createProfileChangeRequest()
-                request?.displayName = formInfo.displayName
-                request?.commitChanges {
+                authResult?.user.sendEmailVerification {
                     error in
-                    guard let userId = authResult?.user.uid, error == nil else {
+                    guard error == nil else {
                         self.error = error?.localizedDescription
                         self.isLoading = false
                         return
                     }
-                    
-                    self.message = "changes commited, \(userId)"
 
                     UserManager.createUserInfo(userId: userId, displayName: formInfo.displayName) {
                         error, message in
-                    
+
                         if let message {
                             self.message = message
                         }
@@ -223,24 +212,10 @@ struct SignUpModal: View {
                             self.isLoading = false
                             return
                         }
-                        
-    //                    self.message = "user info created"
 
-                        authResult?.user.sendEmailVerification {
-                            error in
-                            guard error == nil else {
-                                self.error = error?.localizedDescription
-                                self.isLoading = false
-                                return
-                            }
-                            
-    //                        self.message = "email sent"
-
-                            self.isEmailSent = true
-                            self.isLoading = false
-                            self.error = nil
-                        }
-
+                        self.isEmailSent = true
+                        self.isLoading = false
+                        self.error = nil
                     }
                 }
             }

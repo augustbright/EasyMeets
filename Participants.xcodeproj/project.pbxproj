@@ -16,6 +16,7 @@
 		020F071329745ABC00AC8541 /* UserInvitationsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020F071229745ABC00AC8541 /* UserInvitationsSheet.swift */; };
 		020F071529749DE200AC8541 /* UserInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020F071429749DE200AC8541 /* UserInviteView.swift */; };
 		020F07172974A07500AC8541 /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020F07162974A07500AC8541 /* AccountSettingsView.swift */; };
+		0211625329A7F4A900930432 /* CompleteRegistrationModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211625229A7F4A900930432 /* CompleteRegistrationModal.swift */; };
 		0211BEEE2994038700CF9469 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211BEED2994038700CF9469 /* ImagePicker.swift */; };
 		021E16AB295F690400CC85EA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 021E16AA295F690400CC85EA /* FirebaseAnalytics */; };
 		021E16AD295F690400CC85EA /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 021E16AC295F690400CC85EA /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -118,6 +119,7 @@
 		020F071229745ABC00AC8541 /* UserInvitationsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInvitationsSheet.swift; sourceTree = "<group>"; };
 		020F071429749DE200AC8541 /* UserInviteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInviteView.swift; sourceTree = "<group>"; };
 		020F07162974A07500AC8541 /* AccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
+		0211625229A7F4A900930432 /* CompleteRegistrationModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteRegistrationModal.swift; sourceTree = "<group>"; };
 		0211BEED2994038700CF9469 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		024C64D32958AFAE00C6E581 /* Participants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Participants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		024C64D62958AFAE00C6E581 /* ParticipantsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsApp.swift; sourceTree = "<group>"; };
@@ -296,10 +298,13 @@
 		024C64D52958AFAE00C6E581 /* Participants */ = {
 			isa = PBXGroup;
 			children = (
+				020F07002974336800AC8541 /* Events */,
+				020F07012974339E00AC8541 /* Communities */,
+				020F0702297433B900AC8541 /* Users */,
 				024C6544295B75A300C6E581 /* Info.plist */,
 				024C651F29599E2D00C6E581 /* GoogleService-Info.plist */,
 				024C65162958BF4100C6E581 /* Data */,
-				024C65112958B65800C6E581 /* Components */,
+				024C65112958B65800C6E581 /* Common */,
 				024C65002958B1CF00C6E581 /* Pages */,
 				024C64D62958AFAE00C6E581 /* ParticipantsApp.swift */,
 				024C64DA2958AFAF00C6E581 /* Assets.xcassets */,
@@ -353,17 +358,14 @@
 			path = Pages;
 			sourceTree = "<group>";
 		};
-		024C65112958B65800C6E581 /* Components */ = {
+		024C65112958B65800C6E581 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				020F0702297433B900AC8541 /* Users */,
-				020F07012974339E00AC8541 /* Communities */,
-				020F07002974336800AC8541 /* Events */,
 				024C653E295A271200C6E581 /* FavoriteButton.swift */,
 				024C6540295B583200C6E581 /* ImageDataPicker.swift */,
 				0211BEED2994038700CF9469 /* ImagePicker.swift */,
 			);
-			path = Components;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		024C65162958BF4100C6E581 /* Data */ = {
@@ -383,6 +385,7 @@
 				024C65302959A60F00C6E581 /* SignUpSignIn.swift */,
 				02DFA2B5298027FE00BACE8E /* SignUpModal.swift */,
 				024C6549295CD56400C6E581 /* SignInModal.swift */,
+				0211625229A7F4A900930432 /* CompleteRegistrationModal.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				02C8DD74296DF26E00CE0160 /* UserInfoModel.swift in Sources */,
 				02B4919C2969DED500C5A066 /* CommunityManager.swift in Sources */,
 				024C654A295CD56400C6E581 /* SignInModal.swift in Sources */,
+				0211625329A7F4A900930432 /* CompleteRegistrationModal.swift in Sources */,
 				024C65332959F27600C6E581 /* HomePage.swift in Sources */,
 				024C6541295B583200C6E581 /* ImageDataPicker.swift in Sources */,
 				024C65022958B20300C6E581 /* MyProfilePage.swift in Sources */,

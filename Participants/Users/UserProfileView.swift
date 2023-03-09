@@ -27,13 +27,14 @@ class ProfileFormInfo: ObservableObject {
 
 struct UserProfileView: View {
     @State private var debug = "debug"
-
+    @EnvironmentObject private var userManager: UserManager
+    
     var userId: String
-    var isCurrentUser: Bool = false
+    @State private var isCurrentUser: Bool = false
     
     @State private var isEditing = false
     @ObservedObject var formInfo = ProfileFormInfo()
-
+    
     @State private var showPhotoDialog = false
     @State private var showSubscribersSheet = false
     @State private var showInvitationsSheet = false
@@ -43,7 +44,7 @@ struct UserProfileView: View {
     
     @State private var photoData: Data?
     @State private var photoChanged = false
-
+    
     @State private var userInfo: UserInfoModel?
     
     @State private var isLoading = false
@@ -51,7 +52,6 @@ struct UserProfileView: View {
     
     var body: some View {
         ScrollView {
-//            Text(debug).font(.caption)
             ZStack {
                 readContent
                     .opacity( isEditing ? 0 : 1)
@@ -60,15 +60,16 @@ struct UserProfileView: View {
             }
         }
         .onAppear {
+            isCurrentUser = userId == userManager.user?.uid
             listenUserInfo()
         }
-        .navigationTitle("Edit profile")
+        .navigationTitle("Profile")
         .toolbar {
             if isSaving || isLoading {
                 ToolbarItem(placement: .primaryAction) {
                     ProgressView()
                 }
-            } else {
+            } else if isCurrentUser {
                 if !isEditing {
                     ToolbarItem(placement: .primaryAction) {
                         Button("Edit") {
@@ -86,7 +87,7 @@ struct UserProfileView: View {
                             }
                         }
                     }
-                    
+
                     ToolbarItem(placement: .primaryAction) {
                         Button("Save") {
                             withAnimation {
@@ -198,14 +199,11 @@ struct UserProfileView: View {
                                 Button("Cancel", role: .cancel) {
                                     showSignOutConfirmation = false
                                 }
-                            },
-                                                message: {
+                            }, message: {
                                 Text("Do you want to sign out?")
                             }
                             )
-                            
                         }
-                        
                     }
                     .scrollDisabled(true)
                     .frame(height: 560)
@@ -229,7 +227,7 @@ struct UserProfileView: View {
         }
         .disabled(isSaving || isLoading)
     }
-        
+    
     private func listenUserInfo() {
         let userRef = Firestore.firestore().collection("Users").document(userId)
         userRef.addSnapshotListener() {
@@ -263,6 +261,8 @@ struct UserProfileView: View {
                     isLoading = false
                 }
             }
+        } else {
+            isLoading = false
         }
     }
     
@@ -398,7 +398,7 @@ struct UserProfileView: View {
             completion(userInfo?.avatar, nil)
             return
         }
-
+        
         if let photoData {
             let storage = Storage.storage()
             let storageRef = storage.reference()
@@ -420,7 +420,7 @@ struct UserProfileView: View {
         }
         
     }
-
+    
     func save() {
         self.debug = "saving"
         self.isSaving = true
@@ -440,7 +440,7 @@ struct UserProfileView: View {
                 "displayName": formInfo.displayName,
                 "bio": formInfo.bio
             ])
-
+            
             self.isSaving = false
             isEditing = false
         }
@@ -453,55 +453,18 @@ struct UserProfileView_Previews: PreviewProvider {
         Group {
             NavigationStack {
                 UserProfileView(
-                    userId: "oqf0IbCqDfYWwO0pGHaLnH4EYBe2",
-                    //                    userInfo: UserInfoModel(
-                    //                        displayName: "Mr. Elephant, nice to see you",
-                    //                        avatar: "misc/Asian-Elephant-687x1030.jpg",
-                    //                        bio: "Anyway, I'm just polite.",
-                    //                        interests: ["123"],
-                    //                        subscribers: ["234", "345"],
-                    //                        invitations: ["qwe", "wert", "tyr"],
-                    //                        eventsAttending: ["qwe", "qwe"],
-                    //                        eventsMaybe: ["1"],
-                    //                        eventsStarred: [],
-                    //                        eventsOwn: ["1", "2", "3", "4", "5", "6", "7"],
-                    //                        communitiesOwn: ["2", "42"],
-                    //                        usersSubscriptions: ["a", "b"],
-                    //                        communitiesSubscriptions: ["c", "d", "e"],
-                    //                        usersBlackList: ["1"],
-                    //                        communitiesBlackList: ["1234"]
-                    //                    ),
-                    isCurrentUser: true
+                    userId: "oqf0IbCqDfYWwO0pGHaLnH4EYBe2"
                 )
             }
             .previewDisplayName("Current user")
             
             NavigationStack {
                 UserProfileView(
-                    userId: "oqf0IbCqDfYWwO0pGHaLnH4EYBe2",
-                    
-                    //                    userInfo: UserInfoModel(
-                    //                        displayName: "Mr. Elephant, nice to see you",
-                    //                        avatar: "misc/Asian-Elephant-687x1030.jpg",
-                    //                        bio: "Anyway, I'm just polite.",
-                    //                        interests: ["123"],
-                    //                        subscribers: ["234", "345"],
-                    //                        invitations: ["qwe", "wert", "tyr"],
-                    //                        eventsAttending: ["qwe", "qwe"],
-                    //                        eventsMaybe: ["1"],
-                    //                        eventsStarred: [],
-                    //                        eventsOwn: ["1", "2", "3", "4", "5", "6", "7"],
-                    //                        communitiesOwn: ["2", "42"],
-                    //                        usersSubscriptions: ["a", "b"],
-                    //                        communitiesSubscriptions: ["c", "d", "e"],
-                    //                        usersBlackList: ["1"],
-                    //                        communitiesBlackList: ["1234"]
-                    //                    ),
-                    
-                    isCurrentUser: false
+                    userId: "lSghPbO1UDQDxfYTAcRv06f7clk1"
                 )
             }
             .previewDisplayName("Other user")
         }
+        .environmentObject(UserManager())
     }
 }
