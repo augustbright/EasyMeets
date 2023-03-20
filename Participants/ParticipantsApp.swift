@@ -16,21 +16,13 @@ struct ParticipantsApp: App {
     @StateObject var eventManager = EventManager()
     
     init() {
-//        let settings = Firestore.firestore().settings
-//        settings.host = "localhost:8080"
-//        settings.isPersistenceEnabled = false
-//        settings.isSSLEnabled = false
-//        Firestore.firestore().settings = settings
-//
-//        Auth.auth().useEmulator(withHost:"localhost", port:9099)
-//        Storage.storage().useEmulator(withHost:"localhost", port:9199)
-
         FirebaseApp.configure()
+        Firestore.firestore().clearPersistence()
     }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AuthGuardPage()
                 .environmentObject(userManager)
                 .environmentObject(eventManager)
         }

@@ -21,9 +21,6 @@ struct NewEventView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            if let error {
-                Text(error.localizedDescription)
-            }
             EditEventView() {
                 event, error in
                 guard error == nil else {

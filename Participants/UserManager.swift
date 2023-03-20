@@ -58,6 +58,7 @@ class UserManager: ObservableObject {
     private func listenUserInfo() {
         if let userInfoListeningRegistration {
             userInfoListeningRegistration.remove()
+            self.userInfoListeningRegistration = nil
         }
         guard let userId = self.user?.uid else {
             return
@@ -84,19 +85,8 @@ class UserManager: ObservableObject {
             if document == nil || !(document!.exists) {
                 db.collection("Users").document(userId).setData(UserManager.dataFromUserInfo(UserInfoModel(
                     displayName: displayName,
-                    bio: "",
-                    interests: [],
-                    subscribers: [],
-                    invitations: [],
                     eventsAttending: [],
-                    eventsMaybe: [],
-                    eventsStarred: [],
-                    eventsOwn: [],
-                    communitiesOwn: [],
-                    usersSubscriptions: [],
-                    communitiesSubscriptions: [],
-                    usersBlackList: [],
-                    communitiesBlackList: []
+                    eventsOwn: []
                 ))) {
                     error in
                     if error != nil {
@@ -114,50 +104,16 @@ class UserManager: ObservableObject {
     static func dataFromUserInfo(_ model: UserInfoModel) -> [String: Any] {
         return [
             "displayName": model.displayName,
-            "avatar": model.avatar,
-            "bio": model.bio,
-            "interests": model.interests,
-            
-            "subscribers": model.subscribers,
-            "invitations": model.invitations,
-
             "eventsAttending": model.eventsAttending,
-            "eventsMaybe": model.eventsMaybe,
-            "eventsStarred": model.eventsStarred,
-
-            "eventsOwn": model.eventsOwn,
-            "communitiesOwn": model.communitiesOwn,
-            
-            "usersSubscriptions": model.usersSubscriptions,
-            "communitiesSubscriptions": model.communitiesSubscriptions,
-            
-            "usersBlackList": model.usersBlackList,
-            "communitiesBlackList": model.communitiesBlackList
+            "eventsOwn": model.eventsOwn
         ]
     }
     
     static func userInfoFromData(_ data: [String: Any]) -> UserInfoModel {
         return UserInfoModel(
             displayName: data["displayName"] as! String,
-            avatar: data["avatar"] as? String,
-            bio: data["bio"] as! String,
-            interests: data["interests"] as! [String],
-
-            subscribers: data["subscribers"] as! [String],
-            invitations: data["invitations"] as! [String],
-
             eventsAttending: data["eventsAttending"] as! [String],
-            eventsMaybe: data["eventsMaybe"] as! [String],
-            eventsStarred: data["eventsStarred"] as! [String],
-
-            eventsOwn: data["eventsOwn"] as! [String],
-            communitiesOwn: data["communitiesOwn"] as! [String],
-
-            usersSubscriptions: data["usersSubscriptions"] as! [String],
-            communitiesSubscriptions: data["communitiesSubscriptions"] as! [String],
-
-            usersBlackList: data["usersBlackList"] as! [String],
-            communitiesBlackList: data["communitiesBlackList"] as! [String]
+            eventsOwn: data["eventsOwn"] as! [String]
         )
     }
 
@@ -169,50 +125,14 @@ class UserManager: ObservableObject {
         let userRef = self.db.collection("Users").document(userId)
         userRef.updateData([
             "eventsAttending": FieldValue.arrayUnion([eventId]),
-            "eventsMaybe": FieldValue.arrayRemove([eventId])
         ])
         
         let eventRef = self.db.collection("Events").document(eventId)
         eventRef.updateData([
             "peopleAttending": FieldValue.arrayUnion([userId]),
-            "peopleMaybe": FieldValue.arrayRemove([userId])
         ])
     }
-    
-    func maybeEvent(eventId: String) {
-        guard let userId = self.user?.uid else {
-            return
-        }
         
-        let userRef = self.db.collection("Users").document(userId)
-        userRef.updateData([
-            "eventsMaybe": FieldValue.arrayUnion([eventId]),
-            "eventsAttending": FieldValue.arrayRemove([eventId])
-        ])
-        let eventRef = self.db.collection("Events").document(eventId)
-        eventRef.updateData([
-            "peopleAttending": FieldValue.arrayRemove([userId]),
-            "peopleMaybe": FieldValue.arrayUnion([userId])
-        ])
-    }
-    
-    func toggleStarEvent(eventId: String, isSet: Bool) {
-        guard let userId = self.user?.uid else {
-            return
-        }
-        
-        let userRef = self.db.collection("Users").document(userId)
-        if isSet {
-            userRef.updateData([
-                "eventsStarred": FieldValue.arrayUnion([eventId])
-            ])
-        } else {
-            userRef.updateData([
-                "eventsStarred": FieldValue.arrayRemove([eventId])
-            ])
-        }
-    }
-    
     func leaveEvent(eventId: String) {
         guard let userId = self.user?.uid else {
             return
@@ -220,13 +140,11 @@ class UserManager: ObservableObject {
         
         let userRef = self.db.collection("Users").document(userId)
         userRef.updateData([
-            "eventsMaybe": FieldValue.arrayRemove([eventId]),
             "eventsAttending": FieldValue.arrayRemove([eventId])
         ])
         let eventRef = self.db.collection("Events").document(eventId)
         eventRef.updateData([
             "peopleAttending": FieldValue.arrayRemove([userId]),
-            "peopleMaybe": FieldValue.arrayRemove([userId])
         ])
         
     }

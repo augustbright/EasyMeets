@@ -12,11 +12,9 @@ struct MyProfilePage: View {
     @EnvironmentObject var userManager: UserManager
 
     var body: some View {
-        WithUser {
-            Text("Sign in to see your profile here")
-        } content: { user, userInfo in
-            NavigationStack {
-                UserProfileView(userId: user.uid)
+        NavigationStack {
+            if let userUid = userManager.user?.uid {
+                UserProfileView(userId: userManager.user!.uid)
             }
         }
     }

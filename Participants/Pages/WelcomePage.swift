@@ -9,12 +9,15 @@ import SwiftUI
 
 struct WelcomePage: View {
     var body: some View {
-        Text("Welcome!")
+        SignUpSignIn {
+            Text("Easy Meets")
+        }
     }
 }
 
 struct WelcomePage_Previews: PreviewProvider {
     static var previews: some View {
         WelcomePage()
+            .environmentObject(UserManager())
     }
 }

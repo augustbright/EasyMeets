@@ -88,7 +88,6 @@ class SignUpFormInfo: ObservableObject {
 
 
 struct SignUpModal: View {
-    @Binding var isPresented: Bool
     @ObservedObject var formInfo = SignUpFormInfo()
     @State var error: String?
     @State var isEmailSent = false
@@ -146,9 +145,6 @@ struct SignUpModal: View {
                     }
 
                     Spacer()
-                    Button("Need help?") {
-                    }
-                    .buttonStyle(.borderless)
                 }
                 .padding(.vertical)
                 
@@ -225,6 +221,6 @@ struct SignUpModal: View {
 
 struct SignUpModal_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpModal(isPresented: .constant(true))
+        SignUpModal()
     }
 }

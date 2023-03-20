@@ -10,15 +10,11 @@ import Firebase
 
 struct ExploreEventsPage: View {
     @State private var searchText = ""
-    @State private var filterFavorite = false
     @State private var events: [EventModel]?
     @State private var error: Error?
     
     var body: some View {
         VStack {
-            if let error {
-                Text(error.localizedDescription)
-            }
             if let events = events {
                 List(events) { event in
                     Section {
@@ -29,12 +25,17 @@ struct ExploreEventsPage: View {
                         }
                     }
                 }
-                .navigationTitle(filterFavorite ? "Events (saved)" : "Events")
-                .toolbar {
-                    ToolbarItem {
-                        FavoriteButton(isSet: $filterFavorite)
+                .toolbar() {
+                    ToolbarItem() {
+                        NavigationLink {
+                            CreateEventPage()
+                        } label: {
+                            Label("Let's meet", systemImage: "plus.app")
+                                .labelStyle(.titleAndIcon)
+                        }
                     }
                 }
+                .navigationTitle("Easy Meets")
                 .searchable(text: $searchText)
             }
         }
@@ -45,7 +46,7 @@ struct ExploreEventsPage: View {
     
     func fetchEvents() {
         let db = Firestore.firestore()
-        let collection = db.collection("Events")
+        let collection = db.collection("Events").whereField("deleted", isNotEqualTo: true)
         
         collection.addSnapshotListener() {
             (querySnapshot, error) in
@@ -61,7 +62,9 @@ struct ExploreEventsPage: View {
 
 struct ExploreEventsPage_Previews: PreviewProvider {
     static var previews: some View {
-        ExploreEventsPage()
-            .environmentObject(UserManager())
+        NavigationStack {            
+            ExploreEventsPage()
+                .environmentObject(UserManager())
+        }
     }
 }

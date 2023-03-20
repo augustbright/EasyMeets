@@ -13,12 +13,6 @@ struct EventControlsView: View {
     var onEdit: () -> Void
 
     @EnvironmentObject private var userManager: UserManager
-    private var isStarred: Bool? {
-        guard let userInfo = userManager.userInfo else {
-            return nil
-        }
-        return userInfo.eventsStarred.contains(eventId)
-    }
     
     private var isOwner: Bool? {
         guard let userInfo = userManager.userInfo else {
@@ -40,30 +34,11 @@ struct EventControlsView: View {
                         Text("✅ You are attending")
                             .bold()
                         changeDecision
-                    } else if (userInfo.eventsMaybe.contains(eventId)) {
-                        Text("🤔 You may attend")
-                            .bold()
-                            .foregroundColor(.secondary)
-                        changeDecision
                     } else {
                         Button("I'm in!") {
                             userManager.attendEvent(eventId: eventId)
                         }
                         .buttonStyle(.borderedProminent)
-                        Button("Maybe") {
-                            userManager.maybeEvent(eventId: eventId)
-                        }
-                        .buttonStyle(.bordered)
-                    }
-                    
-                    if let isStarred, isOwner != true {
-                        Button {
-                            userManager.toggleStarEvent(eventId: eventId, isSet: !isStarred)
-                        } label: {
-                            Label("Toggle favorite", systemImage: isStarred ? "heart.fill" : "heart")
-                                .foregroundColor(isStarred ? .red : .gray)
-                                .labelStyle(.iconOnly)
-                        }
                     }
                 }
             }
@@ -74,12 +49,6 @@ struct EventControlsView: View {
         Menu("Change") {
             Button("I'm not attending", role: .destructive) {
                 userManager.leaveEvent(eventId: eventId)
-            }
-            Button("Maybe") {
-                userManager.maybeEvent(eventId: eventId)
-            }
-            Button("I attend") {
-                userManager.attendEvent(eventId: eventId)
             }
         }
         .buttonStyle(.borderless)

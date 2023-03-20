@@ -9,24 +9,19 @@ import SwiftUI
 import FirebaseAuth
 
 struct CompleteRegistrationModal: View {
-    @Binding var isPresented: Bool
+    @EnvironmentObject private var userManager: UserManager
 
     var body: some View {
-        WithUser {
-            Text("")
-        } content: { user, userInfo in
-            VStack(spacing: 16.0) {
-                if !user.isEmailVerified {
-                    Text("We have sent you a email on __\(user.email ?? "")__")
+        VStack(spacing: 16.0) {
+            if let user = userManager.user {
+                Text("We have sent you a email on __\(user.email ?? "")__")
 
-                    Text("Please, follow the link to verify your account")
+                Text("Please, follow the link to verify your account")
 
-                    Button("Send again") {
-                        user.sendEmailVerification() {
-                            error in
-                            self.isPresented = false
-                        }
-                    }
+                Button("Log out") {
+                    do {
+                        try Auth.auth().signOut()
+                    } catch {}
                 }
             }
         }
@@ -35,7 +30,7 @@ struct CompleteRegistrationModal: View {
 
 struct CompleteRegistrationModal_Previews: PreviewProvider {
     static var previews: some View {
-        CompleteRegistrationModal(isPresented: .constant(true))
+        CompleteRegistrationModal()
             .environmentObject(UserManager())
     }
 }
