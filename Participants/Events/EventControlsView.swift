@@ -31,9 +31,7 @@ struct EventControlsView: View {
                             onEdit()
                         }
                     } else if (userInfo.eventsAttending.contains(eventId)) {
-                        Text("✅ You are attending")
-                            .bold()
-                        changeDecision
+                        attending
                     } else {
                         Button("I'm in!") {
                             userManager.attendEvent(eventId: eventId)
@@ -45,14 +43,17 @@ struct EventControlsView: View {
         }
     }
     
-    var changeDecision: some View {
-        Menu("Change") {
+    var attending: some View {
+        Menu {
             Button("I'm not attending", role: .destructive) {
                 userManager.leaveEvent(eventId: eventId)
             }
+        } label: {
+            Text("Attending")
+                .bold()
+                .foregroundColor(.green)
         }
         .buttonStyle(.borderless)
-        .foregroundColor(.secondary)
     }
 }
 

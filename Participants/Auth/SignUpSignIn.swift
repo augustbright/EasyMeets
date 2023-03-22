@@ -6,16 +6,20 @@
 //
 
 import SwiftUI
+import Firebase
+import GoogleSignIn
+import GoogleSignInSwift
 
 struct SignUpSignIn<Content: View>: View {
     var content: () -> Content
-
+    
     @State private var email: String = ""
     @State private var password: String = ""
     @EnvironmentObject private var userManager: UserManager
-
+    
     @State private var isSignUpModalShown = false
-
+    @State private var debug = "debug";
+    
     var body: some View {
         NavigationStack() {
             VStack {
@@ -24,24 +28,19 @@ struct SignUpSignIn<Content: View>: View {
                     .fontWeight(.semibold)
                     .foregroundColor(Color.orange)
                     .padding(.bottom, 16.0)
-
-                if let error = userManager.error {
+                
+                if let error = userManager.signInError {
                     Text(error.localizedDescription)
                         .foregroundColor(.red)
                 }
                 TextField("Email", text: $email)
                 SecureField("Password", text: $password)
                 HStack {
-                    if userManager.isLoading {
-                        ProgressView()
-                            .frame(height: 34)
-                    } else {
-                        Button("Sign In") {
-                            login()
-                        }
-                        .buttonStyle(.borderedProminent)
+                    Button("Sign In") {
+                        login()
                     }
-                    
+                    .buttonStyle(.borderedProminent)
+
                     Spacer()
                     Button("forgot your password?") {
                     }
@@ -49,6 +48,11 @@ struct SignUpSignIn<Content: View>: View {
                     .foregroundColor(.secondary)
                 }
                 .padding(.vertical)
+                
+                GoogleSignInButton() {
+                    userManager.signInWithGoogle()
+                }
+                .padding(.horizontal)
                 
                 Divider()
                     .padding(.vertical)

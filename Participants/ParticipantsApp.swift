@@ -9,15 +9,17 @@ import SwiftUI
 import Firebase
 import FirebaseFirestore
 import FirebaseStorage
+import GoogleSignIn
 
 @main
 struct ParticipantsApp: App {
-    @StateObject var userManager = UserManager()
-    @StateObject var eventManager = EventManager()
+    @StateObject private var userManager = UserManager()
+    @StateObject private var eventManager = EventManager()
     
     init() {
         FirebaseApp.configure()
         Firestore.firestore().clearPersistence()
+        print("debug: start!")
     }
 
     var body: some Scene {
@@ -25,6 +27,14 @@ struct ParticipantsApp: App {
             AuthGuardPage()
                 .environmentObject(userManager)
                 .environmentObject(eventManager)
+                .onOpenURL { url in
+                  GIDSignIn.sharedInstance.handle(url)
+                }
+                .onAppear {
+                  GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+                    //TODO: Check if `user` exists; otherwise, do something with `error`
+                  }
+                }
         }
     }
 }

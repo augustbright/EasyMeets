@@ -9,13 +9,13 @@ import Foundation
 import FirebaseAuth
 import SwiftUI
 import Firebase
+import GoogleSignIn
 
 class UserManager: ObservableObject {
     @Published var user: User?
     @Published var userInfo: UserInfoModel?
-    @Published var error: Error?;
-    @Published var message: String = ""
-    @Published var isLoading: Bool = false
+    @Published var isSigningIn: Bool = false
+    @Published var signInError: Error?
     
     private var userInfoListeningRegistration: ListenerRegistration?
     private let db = Firestore.firestore()
@@ -25,22 +25,75 @@ class UserManager: ObservableObject {
     }
     
     func signIn(withEmail email: String, password: String, completion: ((AuthDataResult?, Error?) -> Void)?) {
-        self.isLoading = true
-        self.message = "Loading"
+        self.isSigningIn = true
         Auth.auth().signIn(withEmail: email, password: password) {
             [weak self] (result, error) in
             guard let self = self else { return }
-            self.message = "Loaded"
-            self.isLoading = false
+            self.isSigningIn = false
             
             guard error == nil else {
-                self.error = error
+                self.signInError = error
+                self.isSigningIn = false
                 return
             }
-            self.error = nil
+            self.signInError = nil
             if let completion {
                 completion(result, error)
             }
+        }
+    }
+    
+    func signInWithGoogle() {
+        self.isSigningIn = true
+        guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow?.rootViewController else {
+            self.isSigningIn = false
+            return
+        }
+        
+        guard let clientID = FirebaseApp.app()?.options.clientID else {
+            self.isSigningIn = false
+            return
+        }
+        
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+        
+        GIDSignIn.sharedInstance.signIn(
+            withPresenting: presentingViewController) { signInResult, error in
+                guard error == nil else {
+                    self.signInError = error
+                    self.isSigningIn = false
+                    return
+                }
+                guard let result = signInResult else {
+                    self.isSigningIn = false
+                    return
+                }
+                let user = result.user
+                guard let idToken = user.idToken?.tokenString
+                else {
+                    self.isSigningIn = false
+                    return
+                }
+                
+                let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                               accessToken: user.accessToken.tokenString)
+
+                Auth.auth().signIn(with: credential) { result, error in
+                    guard error == nil else {
+                        self.signInError = error
+                        return
+                    }
+                    self.isSigningIn = false
+                }
+            }
+    }
+    
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("Couldn't sign out")
         }
     }
     
@@ -50,11 +103,11 @@ class UserManager: ObservableObject {
                 return
             }
             self.user = user
-            self.message = "displayName: \(user?.displayName)"
+            self.userInfo = nil
             self.listenUserInfo()
         }
     }
-        
+    
     private func listenUserInfo() {
         if let userInfoListeningRegistration {
             userInfoListeningRegistration.remove()
@@ -116,7 +169,7 @@ class UserManager: ObservableObject {
             eventsOwn: data["eventsOwn"] as! [String]
         )
     }
-
+    
     func attendEvent(eventId: String) {
         guard let userId = self.user?.uid else {
             return
@@ -132,7 +185,7 @@ class UserManager: ObservableObject {
             "peopleAttending": FieldValue.arrayUnion([userId]),
         ])
     }
-        
+    
     func leaveEvent(eventId: String) {
         guard let userId = self.user?.uid else {
             return
