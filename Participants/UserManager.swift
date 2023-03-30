@@ -14,6 +14,7 @@ import GoogleSignIn
 class UserManager: ObservableObject {
     @Published var user: User?
     @Published var userInfo: UserInfoModel?
+    @Published var hasUserInfo: Bool?
     @Published var isSigningIn: Bool = false
     @Published var signInError: Error?
     
@@ -104,6 +105,7 @@ class UserManager: ObservableObject {
             }
             self.user = user
             self.userInfo = nil
+            self.hasUserInfo = nil
             self.listenUserInfo()
         }
     }
@@ -125,6 +127,10 @@ class UserManager: ObservableObject {
             }
             if let document, document.exists, let data = document.data() {
                 self.userInfo = UserManager.userInfoFromData(data)
+                self.hasUserInfo = true
+            } else {
+                self.userInfo = nil
+                self.hasUserInfo = false
             }
         }
     }

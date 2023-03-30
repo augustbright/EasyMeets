@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserInfoModel {
+struct UserInfoModel: Equatable {
     var displayName: String
     var eventsAttending: [String]
     var eventsOwn: [String]

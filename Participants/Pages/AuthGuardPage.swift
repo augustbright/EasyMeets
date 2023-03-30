@@ -13,7 +13,7 @@ struct AuthGuardPage: View {
     @State private var debug = "debug";
     var body: some View {
         VStack {
-            if userManager.isSigningIn {
+            if userManager.isSigningIn || userManager.user != nil && userManager.hasUserInfo == nil {
                 HStack {
                     Spacer()
                     ProgressView("Signing In")
@@ -23,7 +23,7 @@ struct AuthGuardPage: View {
                 ContentView()
             } else if let user = userManager.user, !user.isEmailVerified {
                 CompleteRegistrationModal()
-            } else if userManager.user != nil && userManager.userInfo == nil {
+            } else if userManager.hasUserInfo == false {
                 SignUpIntroduce()
             } else {
                 WelcomePage()

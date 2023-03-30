@@ -44,7 +44,7 @@ struct EventPage: View {
 struct EventPage_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            EventPage(eventId: "J4fs1BWJYdrdjuuYlDf2")
+            EventPage(eventId: "S2bZIbKEk8NR13Ds9Nut")
                 .environmentObject(UserManager())
         }
     }

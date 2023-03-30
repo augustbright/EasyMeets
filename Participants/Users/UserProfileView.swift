@@ -26,7 +26,8 @@ class ProfileFormInfo: ObservableObject {
 
 struct UserProfileView: View {
     var userId: String
-
+    var isActive: Bool
+    
     @State private var debug = "debug"
     @EnvironmentObject private var userManager: UserManager
     @ObservedObject var formInfo = ProfileFormInfo()
@@ -52,32 +53,34 @@ struct UserProfileView: View {
         }
         .navigationTitle(userInfo?.displayName ?? "")
         .toolbar {
-            if isSaving || isLoading {
-                ToolbarItem(placement: .primaryAction) {
-                    ProgressView()
-                }
-            } else if isCurrentUser {
-                if !isEditing {
+            if self.isActive {
+                if isSaving || isLoading {
                     ToolbarItem(placement: .primaryAction) {
-                        Button("Edit") {
-                            withAnimation {
-                                isEditing = true
+                        ProgressView()
+                    }
+                } else if isCurrentUser {
+                    if !isEditing {
+                        ToolbarItem(placement: .primaryAction) {
+                            Button("Edit") {
+                                withAnimation {
+                                    isEditing = true
+                                }
                             }
                         }
-                    }
-                } else {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
-                            withAnimation {
-                                isEditing = false
+                    } else {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") {
+                                withAnimation {
+                                    isEditing = false
+                                }
                             }
                         }
-                    }
-
-                    ToolbarItem(placement: .primaryAction) {
-                        Button("Save") {
-                            withAnimation {
-                                save()
+                        
+                        ToolbarItem(placement: .primaryAction) {
+                            Button("Save") {
+                                withAnimation {
+                                    save()
+                                }
                             }
                         }
                     }
@@ -90,36 +93,36 @@ struct UserProfileView: View {
     
     var readContent: some View {
         Form {
-                Section("Account") {
-                    Button("Sign out", role: .destructive) {
-                        showSignOutConfirmation = true
-                    }
-                    .confirmationDialog(Text("Sign out"),
-                                        isPresented: $showSignOutConfirmation,
-                                        titleVisibility: .automatic,
-                                        actions: {
-                        Button("Sign out", role: .destructive) {
-                            do {
-                                try Auth.auth().signOut()
-                            } catch {}
-                        }
-                        Button("Cancel", role: .cancel) {
-                            showSignOutConfirmation = false
-                        }
-                    }, message: {
-                        Text("Do you want to sign out?")
-                    }
-                    )
+            Section("Account") {
+                Button("Sign out", role: .destructive) {
+                    showSignOutConfirmation = true
                 }
+                .confirmationDialog(Text("Sign out"),
+                                    isPresented: $showSignOutConfirmation,
+                                    titleVisibility: .automatic,
+                                    actions: {
+                    Button("Sign out", role: .destructive) {
+                        do {
+                            try Auth.auth().signOut()
+                        } catch {}
+                    }
+                    Button("Cancel", role: .cancel) {
+                        showSignOutConfirmation = false
+                    }
+                }, message: {
+                    Text("Do you want to sign out?")
+                }
+                )
+            }
         }
     }
     
     var editContent: some View {
         Form {
-                LabeledContent("Name") {
-                    TextField("Display name", text: $formInfo.displayName)
-                }
-                .validation(formInfo.displayNameValidation)
+            LabeledContent("Name") {
+                TextField("Display name", text: $formInfo.displayName)
+            }
+            .validation(formInfo.displayNameValidation)
         }
         .disabled(isSaving || isLoading)
     }
@@ -134,7 +137,7 @@ struct UserProfileView: View {
             isLoading = true
             
             if let data = snapshot?.data() {
-
+                
                 let userInfo = UserManager.userInfoFromData(data)
                 self.userInfo = userInfo
                 formInfo.displayName = userInfo.displayName
@@ -142,12 +145,12 @@ struct UserProfileView: View {
             }
         }
     }
-
+    
     func save() {
         if !formInfo.form.allValid {
             return
         }
-
+        
         let userRef = Firestore.firestore().collection("Users").document(userId)
         userRef.updateData([
             "displayName": formInfo.displayName,
@@ -161,14 +164,16 @@ struct UserProfileView_Previews: PreviewProvider {
         Group {
             NavigationStack {
                 UserProfileView(
-                    userId: "4bR1KOGJF0Vbm2uck2ibQUEfJBz1"
+                    userId: "4bR1KOGJF0Vbm2uck2ibQUEfJBz1",
+                    isActive: true
                 )
             }
             .previewDisplayName("Current user")
             
             NavigationStack {
                 UserProfileView(
-                    userId: "lSghPbO1UDQDxfYTAcRv06f7clk1"
+                    userId: "lSghPbO1UDQDxfYTAcRv06f7clk1",
+                    isActive: true
                 )
             }
             .previewDisplayName("Other user")

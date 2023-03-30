@@ -10,11 +10,12 @@ import FirebaseAuth
 
 struct MyProfilePage: View {
     @EnvironmentObject var userManager: UserManager
+    var isActive: Bool
 
     var body: some View {
-        NavigationStack {
+        VStack {
             if let userUid = userManager.user?.uid {
-                UserProfileView(userId: userManager.user!.uid)
+                UserProfileView(userId: userManager.user!.uid, isActive: self.isActive)
             }
         }
     }
@@ -22,7 +23,7 @@ struct MyProfilePage: View {
 
 struct MyProfilePage_Previews: PreviewProvider {
     static var previews: some View {
-        MyProfilePage()
+        MyProfilePage(isActive: true)
             .environmentObject(UserManager())
     }
 }

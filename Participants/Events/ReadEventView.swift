@@ -23,43 +23,45 @@ struct ReadEventView: View {
     
     var body: some View {
         List() {
-            Section(header: VStack(alignment: .leading) {
-                HStack {
-                    Label("Time", systemImage: "calendar")
-                        .labelStyle(.iconOnly)
-                    Text(event.startDateFormatted, style: .date)
-                    Text(event.startDateFormatted, style: .time).bold()
+            HStack {
+                Label("Time", systemImage: "calendar")
+                    .labelStyle(.iconOnly)
+                Text(event.startDateFormatted, style: .date)
+                Text(event.startDateFormatted, style: .time).bold()
+            }
+            LabeledContent("By") {
+                NavigationLink  {
+                    UserProfileView(userId: event.authorId, isActive: true)
+                } label: {
+                    Text(event.authorName)
                 }
-            }) {
-                LabeledContent("By") {
-                    NavigationLink  {
-                        UserProfileView(userId: event.authorId)
-                    } label: {
-                        Text(event.authorName)
-                    }
+            }
+            Section {
+                VStack(alignment: .leading) {
+                    Text(event.description)
+                        .multilineTextAlignment(.leading)
                 }
-                Section {
-                    VStack(alignment: .leading) {
-                        Text(event.description)
-                            .multilineTextAlignment(.leading)
-                    }
-                }
+            }
 
-                Section() {
-                    VStack(alignment: .leading) {
-                        if let location {
-                            Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, userTrackingMode: .none, annotationItems: [location]) {
-                                (location) -> MapPin in MapPin(coordinate: location.coordinate)
-                            }
-                            .frame(height: 200.0)
+            Section() {
+                VStack(alignment: .leading) {
+                    if let location {
+                        Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, userTrackingMode: .none, annotationItems: [location]) {
+                            (location) -> MapPin in MapPin(coordinate: location.coordinate)
                         }
+                        .frame(height: 200.0)
+                    }
 
-                        if let locationInfo = event.locationAdditionalInfo, !locationInfo.isEmpty {
-                            Text(locationInfo)
-                                .foregroundColor(.secondary)
-                        }
+                    if let locationInfo = event.locationAdditionalInfo, !locationInfo.isEmpty {
+                        Text(locationInfo)
+                            .foregroundColor(.secondary)
                     }
                 }
+            }
+            if let eventId = event.id {
+                Text("Comments")
+                    .font(.title2)
+                Comments(eventId: eventId)
             }
         }
         .listStyle(.plain)

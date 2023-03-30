@@ -60,7 +60,6 @@ struct EditEventView: View {
     )
     @State private var locations: [Location] = Location.getLocations()
     @State private var locationAdditionalInfo = ""
-    @State private var description = ""
 
     @State private var isSaving = false
     @State private var showingSuccessPopup = false
@@ -136,7 +135,7 @@ struct EditEventView: View {
             longitudinalMeters: 3000
         )
         locationAdditionalInfo = originalEvent.locationAdditionalInfo
-        description = originalEvent.description
+        formInfo.description = originalEvent.description
     }
     
     private func save(completion: @escaping (EventModel?, Error?) -> Void) {
@@ -153,7 +152,7 @@ struct EditEventView: View {
                 longtitude: region.center.longitude,
                 latitude: region.center.latitude,
                 locationAdditionalInfo: locationAdditionalInfo,
-                description: description,
+                description: formInfo.description,
                 deleted: false,
                 peopleAttending: []
             );
