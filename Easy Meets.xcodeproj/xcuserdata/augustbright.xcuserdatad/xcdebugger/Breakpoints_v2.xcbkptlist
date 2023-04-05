@@ -7,64 +7,495 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0CA8B17F-AC4E-42AD-A740-118429412E45"
+            uuid = "6F74AB1C-2965-4FB7-8A01-4C056FC1E576"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Participants/Pages/MyProfilePage.swift"
+            filePath = "Participants/Events/PlansObserver.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "setEvents(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2A5E9AC1-670C-4531-B163-B61E72C1945B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/Events/PlansObserver.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "setEvents(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2A5E9AC1-670C-4531-B163-B61E72C1945B - 53582ea4cf2b6c1f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Participants.PlansObserver.setEvents(Swift.Optional&lt;Swift.Array&lt;Participants.EventModel&gt;&gt;) -&gt; ()"
+                  moduleName = "Participants"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/augustbright/Documents/repo/Participants/Participants/Events/PlansObserver.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "1756">
+               </Location>
+               <Location
+                  uuid = "2A5E9AC1-670C-4531-B163-B61E72C1945B - 7c9d38a546a206a3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #5 (Swift.Optional&lt;__C.FIRDocumentSnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Participants.PlansObserver.setEvents(Swift.Optional&lt;Swift.Array&lt;Participants.EventModel&gt;&gt;) -&gt; ()"
+                  moduleName = "Participants"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/augustbright/Documents/repo/Participants/Participants/Events/PlansObserver.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "384">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1D65C06E-0D4D-4A43-9E4F-E2CE2DE3CE07"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/Events/PlansObserver.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "setEvents(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "34BB77BE-1941-4EF2-827D-C79F4D05E6F5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/Events/PlansObserver.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "setEvents(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B43BB855-342E-4FB4-BE99-0BD30B97B7CD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/Events/PlansObserver.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "setEvents(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "36781D69-D95E-4AD7-AE54-288ECD13081E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/Feedbacks/FeedbacksObserver.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "listen()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "84ECF7ED-B851-407E-BE72-A9A271EF42B8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/Feedbacks/FeedbacksObserver.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "listen()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6E18CEA1-ADB7-45EF-B55C-E1CF9BCAE9A0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/Feedbacks/FeedbackArea.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
             landmarkName = "body"
             landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "6E18CEA1-ADB7-45EF-B55C-E1CF9BCAE9A0 - e5bf8a208e179337"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Participants.FeedbackArea.body.getter : some"
+                  moduleName = "Participants"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/augustbright/Documents/repo/Participants/Participants/Feedbacks/FeedbackArea.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "160">
+               </Location>
+               <Location
+                  uuid = "6E18CEA1-ADB7-45EF-B55C-E1CF9BCAE9A0 - f96c61bdf5442ef8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Text)&gt; in Participants.FeedbackArea.body.getter : some"
+                  moduleName = "Participants"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/augustbright/Documents/repo/Participants/Participants/Feedbacks/FeedbackArea.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "376">
+               </Location>
+               <Location
+                  uuid = "6E18CEA1-ADB7-45EF-B55C-E1CF9BCAE9A0 - f96c61bdf5442ed9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Text)&gt; in Participants.FeedbackArea.body.getter : some"
+                  moduleName = "Participants"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/augustbright/Documents/repo/Participants/Participants/Feedbacks/FeedbackArea.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "1820">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F5A86263-3F74-4627-A4D1-E5A22E9FB3E0"
+            uuid = "B74C0B87-CFF9-4847-9DDE-485107996ABB"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Participants/Components/Users/Components/Auth/SignUpModal.swift"
+            filePath = "Participants/Users/UserProfileView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "register()"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "listenRating(userInfo:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B74C0B87-CFF9-4847-9DDE-485107996ABB - 7d3c00b446f360f9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Participants.UserProfileView.listenRating(userInfo: Swift.Optional&lt;Participants.UserInfoModel&gt;) -&gt; ()"
+                  moduleName = "Participants"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/augustbright/Documents/repo/Participants/Participants/Users/UserProfileView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "180"
+                  endingLineNumber = "180"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  uuid = "B74C0B87-CFF9-4847-9DDE-485107996ABB - 7d3c00b446f360f9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Participants.UserProfileView.listenRating(userInfo: Swift.Optional&lt;Participants.UserInfoModel&gt;) -&gt; ()"
+                  moduleName = "Participants"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/augustbright/Documents/repo/Participants/Participants/Users/UserProfileView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "180"
+                  endingLineNumber = "180"
+                  offsetFromSymbolStart = "268">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "949F5AF9-2EF8-4ADB-B8CC-D598D530C4AB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/Users/UserProfileView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
+            landmarkName = "listenRating(userInfo:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "01EE5E33-71AA-4FBE-BE1C-576E152E2A2C"
+            uuid = "A8146576-C593-4E8F-A67C-F942055B6B19"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Participants/Comments/CommentModel.swift"
+            filePath = "Participants/Users/UserProfileView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "init(dateTimeCreated:dateTimeEdited:authorId:authorName:content:deleted:likes:replySectionId:)"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "listenRating(userInfo:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FC0ABFC9-F565-4BD0-B397-822EB2C64BCC"
+            uuid = "AF662625-FB5B-4263-9327-EF1FF16CCA91"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Participants/Comments/CommentModel.swift"
+            filePath = "Participants/Users/UserProfileView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "init(data:)"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
+            landmarkName = "listenRating(userInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "52A59708-A51E-4C57-B129-394A78F09E8F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/Users/UserProfileView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "listenRating(userInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2AAE0DF7-5927-49DC-81D4-1352B4A7D385"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/Users/UserProfileView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "listenRating(userInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "445ADFA5-C497-4CB5-9622-A95FB1D75853"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/Users/UserProfileView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
+            landmarkName = "listenRating(userInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9BBD23D3-A62A-4B18-A3C3-3B8EFABE19CC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/Users/UserProfileView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
+            landmarkName = "listenRating(userInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8AD1A04B-3AB6-4A8D-8F9C-2F26F570DDFC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/Users/UserProfileView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
+            landmarkName = "listenRating(userInfo:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8AD1A04B-3AB6-4A8D-8F9C-2F26F570DDFC - 33ebf585ea907092"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Participants.UserProfileView.listenRating(userInfo: Swift.Optional&lt;Participants.UserInfoModel&gt;) -&gt; ()"
+                  moduleName = "Participants"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/augustbright/Documents/repo/Participants/Participants/Users/UserProfileView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "198"
+                  endingLineNumber = "198"
+                  offsetFromSymbolStart = "228">
+               </Location>
+               <Location
+                  uuid = "8AD1A04B-3AB6-4A8D-8F9C-2F26F570DDFC - 7ecfc2a290a2ae07"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FIRQueryDocumentSnapshot) -&gt; Participants.FeedbackModel in closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Participants.UserProfileView.listenRating(userInfo: Swift.Optional&lt;Participants.UserInfoModel&gt;) -&gt; ()"
+                  moduleName = "Participants"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/augustbright/Documents/repo/Participants/Participants/Users/UserProfileView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1525B467-4940-4B1B-B942-6EFA34386FA4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/UserManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "listen()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B8575519-A6E2-4450-B21A-5BB46809BDDF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/UserManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "reload()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B8575519-A6E2-4450-B21A-5BB46809BDDF - 20a1185cac2e6ed2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Participants.UserManager.reload() -&gt; ()"
+                  moduleName = "Participants"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/augustbright/Documents/repo/Participants/Participants/UserManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "B8575519-A6E2-4450-B21A-5BB46809BDDF - 9a5c0bfc9cd1d64"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Participants.UserManager.reload() -&gt; ()"
+                  moduleName = "Participants"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/augustbright/Documents/repo/Participants/Participants/UserManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4ED30A07-4E01-4A92-BF94-A22DE41EF42A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Participants/UserManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "reload()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

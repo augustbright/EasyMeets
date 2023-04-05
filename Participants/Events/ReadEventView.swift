@@ -13,6 +13,7 @@ import MapKit
 struct ReadEventView: View {
     var event: EventModel
     var onEditEvent: () -> Void
+    @EnvironmentObject private var userManager: UserManager
     
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude:  41.715137, longitude: 44.807095),
@@ -21,50 +22,71 @@ struct ReadEventView: View {
     )
     @State private var location: Location?
     
+    var userHasParticipated: Bool {
+        guard let userId = self.userManager.user?.uid else {
+            return false
+        }
+        let userAttended = event.peopleAttending.contains(userId)
+        let eventPassed = NSCalendar.current.dateComponents([.hour], from: event.startDateFormatted, to: Date()).hour ?? 0 > 3
+        
+        return userAttended && eventPassed
+    }
+    
     var body: some View {
-        List() {
-            HStack {
-                Label("Time", systemImage: "calendar")
-                    .labelStyle(.iconOnly)
-                Text(event.startDateFormatted, style: .date)
-                Text(event.startDateFormatted, style: .time).bold()
-            }
-            LabeledContent("By") {
-                NavigationLink  {
-                    UserProfileView(userId: event.authorId, isActive: true)
-                } label: {
-                    Text(event.authorName)
+        ScrollView {
+            VStack(alignment: .leading) {
+                HStack {
+                    Label("Time", systemImage: "calendar")
+                        .labelStyle(.iconOnly)
+                    Text(event.startDateFormatted, style: .date)
+                    Text(event.startDateFormatted, style: .time).bold()
+                    Spacer()
                 }
-            }
-            Section {
+                .padding(.bottom, 2)
+                HStack {
+                    Text("By")
+                        .font(.caption)
+                    NavigationLink  {
+                        UserProfileView(userId: event.authorId, isActive: true)
+                    } label: {
+                        Text(event.authorName)
+                    }
+                    Spacer()
+                }
+                
+                if let eventId = event.id, userHasParticipated {
+                    FeedbackArea(eventId: eventId)
+                        .padding(.vertical)
+                        .shadow(radius: 2)
+                }
+                
                 VStack(alignment: .leading) {
                     Text(event.description)
                         .multilineTextAlignment(.leading)
                 }
-            }
 
-            Section() {
-                VStack(alignment: .leading) {
-                    if let location {
-                        Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, userTrackingMode: .none, annotationItems: [location]) {
-                            (location) -> MapPin in MapPin(coordinate: location.coordinate)
+                Section() {
+                    VStack(alignment: .leading) {
+                        if let location {
+                            Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, userTrackingMode: .none, annotationItems: [location]) {
+                                (location) -> MapPin in MapPin(coordinate: location.coordinate)
+                            }
+                            .frame(height: 200.0)
                         }
-                        .frame(height: 200.0)
-                    }
 
-                    if let locationInfo = event.locationAdditionalInfo, !locationInfo.isEmpty {
-                        Text(locationInfo)
-                            .foregroundColor(.secondary)
+                        if !event.locationAdditionalInfo.isEmpty {
+                            Text(event.locationAdditionalInfo)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
-            }
-            if let eventId = event.id {
-                Text("Comments")
-                    .font(.title2)
-                Comments(eventId: eventId)
+                if let eventId = event.id {
+                    Text("Comments")
+                        .font(.title2)
+                    Comments(eventId: eventId)
+                }
             }
         }
-        .listStyle(.plain)
         .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     if let eventId = event.id {

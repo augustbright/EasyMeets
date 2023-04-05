@@ -74,13 +74,12 @@ struct MyPlansPage: View {
         .padding(.horizontal)
         .navigationTitle("My Plans")
         .onAppear() {
-            self.plansObserver.setUserInfo(userManager.userInfo)
+            self.plansObserver.setUserInfo(userManager.userInfo, userManager.user)
         }
         .onChange(of: userManager.userInfo) {
             userInfo in
-            self.plansObserver.setUserInfo(userInfo)
+            self.plansObserver.setUserInfo(userManager.userInfo, userManager.user)
         }
-        
     }
 }
 

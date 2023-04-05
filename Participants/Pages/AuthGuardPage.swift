@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
-
+import FirebaseAuth
 
 struct AuthGuardPage: View {
     @EnvironmentObject private var userManager: UserManager
-    @State private var debug = "debug";
+    @State private var viewState = UUID()
+    
     var body: some View {
         VStack {
             if userManager.isSigningIn || userManager.user != nil && userManager.hasUserInfo == nil {
@@ -27,6 +28,11 @@ struct AuthGuardPage: View {
                 SignUpIntroduce()
             } else {
                 WelcomePage()
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            if let user = userManager.user, !user.isEmailVerified {
+                userManager.reload()
             }
         }
     }

@@ -75,5 +75,5 @@ struct EventModel: Identifiable {
         return newFormatter.date(from: startDate)!
     }
 
-    static var mock = EventModel(id: "4Y3d8QSVEFqgZgAQFbg8", dateCreated: nil, authorId: "ErWgEodvZnMgQ20MDgR0", authorName: "Pushkin",  startDate: "2023-01-15T18:54:19Z", longtitude: 44.802095, latitude:  41.715137, locationAdditionalInfo: "Station square", description: "An awesome event", deleted: false, peopleAttending: [])
+    static var mock = EventModel(id: "3HDdQMelcKrh17vFWZB2", dateCreated: nil, authorId: "ErWgEodvZnMgQ20MDgR0", authorName: "Pushkin",  startDate: "2022-01-15T18:54:19Z", longtitude: 44.802095, latitude:  41.715137, locationAdditionalInfo: "Station square", description: "An awesome event", deleted: false, peopleAttending: ["4bR1KOGJF0Vbm2uck2ibQUEfJBz1"])
 }

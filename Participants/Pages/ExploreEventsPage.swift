@@ -26,8 +26,10 @@ struct ExploreEventsPage: View {
     @EnvironmentObject private var userManager: UserManager
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack() {
             ScrollView {
+                FeedbackRequest()
+                    .padding()
                 if let events = events {
                     VStack(alignment: .leading) {
                         HStack{Spacer()}
@@ -49,7 +51,7 @@ struct ExploreEventsPage: View {
                     }
                     .padding([.horizontal])
                     
-                    VStack(alignment: .leading) {
+                    VStack {
                         Text("Discover More Events")
                             .font(.title3)
                             .padding(.top)
@@ -82,11 +84,11 @@ struct ExploreEventsPage: View {
         .navigationTitle("Easy Meets")
         .onAppear() {
             self.fetchEvents()
-            self.plansObserver.setUserInfo(userManager.userInfo)
+            self.plansObserver.setUserInfo(userManager.userInfo, userManager.user)
         }
         .onChange(of: userManager.userInfo) {
             userInfo in
-            self.plansObserver.setUserInfo(userInfo)
+            self.plansObserver.setUserInfo(userManager.userInfo, userManager.user)
         }
     }
     

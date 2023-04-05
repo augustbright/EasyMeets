@@ -25,6 +25,15 @@ class UserManager: ObservableObject {
         listen()
     }
     
+    func reload() {
+        Auth.auth().currentUser?.reload() { e in
+            self.user = Auth.auth().currentUser
+            self.userInfo = nil
+            self.hasUserInfo = nil
+            self.listenUserInfo()
+        }
+    }
+    
     func signIn(withEmail email: String, password: String, completion: ((AuthDataResult?, Error?) -> Void)?) {
         self.isSigningIn = true
         Auth.auth().signIn(withEmail: email, password: password) {

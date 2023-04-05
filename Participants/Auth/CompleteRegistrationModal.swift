@@ -10,21 +10,50 @@ import FirebaseAuth
 
 struct CompleteRegistrationModal: View {
     @EnvironmentObject private var userManager: UserManager
+    @State private var didntGetEmailPresented = false
 
     var body: some View {
-        VStack(spacing: 16.0) {
+        VStack(alignment: .leading) {
             if let user = userManager.user {
-                Text("We have sent you a email on __\(user.email ?? "")__")
+                VStack() {
+                    Text("Verify your email")
+                        .font(.title)
 
-                Text("Please, follow the link to verify your account")
+                    HStack{Spacer()}
+                    Text(user.email ?? "")
+                        .bold()
+                        .font(.title2)
 
-                Button("Log out") {
+                }
+
+                VStack(alignment: .leading) {
+                    Text("We've sent you a verification email on this address.")
+                        .padding(.top)
+                    Text("Please, __follow the link__ in the email to complete your registration.")
+                }
+                .foregroundColor(.secondary)
+
+                Button("I didn't get any email") {
+                    self.didntGetEmailPresented = true
+                }
+                    .controlSize(.small)
+                    .padding(.top, 2)
+                    .sheet(isPresented: $didntGetEmailPresented) {
+                        DidntGetVerificationEmail(isPresented: $didntGetEmailPresented)
+                    }
+
+                Divider()
+                    .padding(.top)
+                
+                Button("Switch account") {
                     do {
                         try Auth.auth().signOut()
                     } catch {}
                 }
+                .buttonStyle(.bordered)
             }
         }
+        .padding(.horizontal)
     }
 }
 

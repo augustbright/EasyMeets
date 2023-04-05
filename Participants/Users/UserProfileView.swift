@@ -38,6 +38,16 @@ struct UserProfileView: View {
     @State private var isLoading = false
     @State private var isSaving = false
     
+    @State private var feedbacksListener: ListenerRegistration?
+    @State private var feedbacks: [FeedbackModel]?
+    
+    var positiveFeedbacks: [FeedbackModel]? {
+        guard let feedbacks = self.feedbacks else {
+            return nil;
+        }
+        return feedbacks.filter { $0.liked == true }
+    }
+    
     var body: some View {
         VStack {
             ZStack {
@@ -50,6 +60,10 @@ struct UserProfileView: View {
         .onAppear {
             isCurrentUser = userId == userManager.user?.uid
             listenUserInfo()
+            self.listenRating(userInfo: self.userInfo)
+        }
+        .onChange(of: self.userInfo) { userInfo in
+            self.listenRating(userInfo: self.userInfo)
         }
         .navigationTitle(userInfo?.displayName ?? "")
         .toolbar {
@@ -92,29 +106,56 @@ struct UserProfileView: View {
     }
     
     var readContent: some View {
-        Form {
-            Section("Account") {
-                Button("Sign out", role: .destructive) {
-                    showSignOutConfirmation = true
+        VStack {
+            if let positiveFeedbacks, positiveFeedbacks.count > 0 {
+                HStack {
+                    VStack() {
+                        Text("\(positiveFeedbacks.count) ❤️")
+                            .bold()
+                            .font(.title)
+                        Text("feedbacks")
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 12)
+                        .fill(Color(UIColor.tertiarySystemBackground)))
+                    
+                    Spacer()
                 }
-                .confirmationDialog(Text("Sign out"),
-                                    isPresented: $showSignOutConfirmation,
-                                    titleVisibility: .automatic,
-                                    actions: {
+                .padding(20)
+            }
+            Form {
+                NavigationLink("Plans") {
+                    MyPlansPage()
+                }
+
+                NavigationLink("History") {
+                    HistoryPage()
+                }
+
+                Section("Account") {
                     Button("Sign out", role: .destructive) {
-                        do {
-                            try Auth.auth().signOut()
-                        } catch {}
+                        showSignOutConfirmation = true
                     }
-                    Button("Cancel", role: .cancel) {
-                        showSignOutConfirmation = false
+                    .confirmationDialog(Text("Sign out"),
+                                        isPresented: $showSignOutConfirmation,
+                                        titleVisibility: .automatic,
+                                        actions: {
+                        Button("Sign out", role: .destructive) {
+                            do {
+                                try Auth.auth().signOut()
+                            } catch {}
+                        }
+                        Button("Cancel", role: .cancel) {
+                            showSignOutConfirmation = false
+                        }
+                    }, message: {
+                        Text("Do you want to sign out?")
                     }
-                }, message: {
-                    Text("Do you want to sign out?")
+                    )
                 }
-                )
             }
         }
+        .background(Color(UIColor.secondarySystemBackground))
     }
     
     var editContent: some View {
@@ -137,7 +178,6 @@ struct UserProfileView: View {
             isLoading = true
             
             if let data = snapshot?.data() {
-                
                 let userInfo = UserManager.userInfoFromData(data)
                 self.userInfo = userInfo
                 formInfo.displayName = userInfo.displayName
@@ -146,7 +186,7 @@ struct UserProfileView: View {
         }
     }
     
-    func save() {
+    private func save() {
         if !formInfo.form.allValid {
             return
         }
@@ -156,6 +196,37 @@ struct UserProfileView: View {
             "displayName": formInfo.displayName,
         ])
         isEditing = false
+    }
+    
+    private func listenRating(userInfo: UserInfoModel?) {
+        if let currentListener = self.feedbacksListener {
+            currentListener.remove()
+        }
+        guard let userInfo else {
+            self.feedbacks = nil
+            return
+        }
+        guard !userInfo.eventsOwn.isEmpty else {
+            self.feedbacks = nil
+            return
+        }
+
+        self.feedbacksListener = Firestore.firestore().collectionGroup("feedbacks")
+            .whereField("eventId", in: userInfo.eventsOwn).addSnapshotListener { snapshot, error in
+                guard error == nil else {
+                    self.feedbacks = nil
+                    return;
+                }
+                guard snapshot != nil else {
+                    self.feedbacks = nil
+                    return
+                }
+
+                self.feedbacks = snapshot?.documents.map { documentSnapshot in
+                    let data = documentSnapshot.data()
+                    return createFeedbackModelFromData(data)
+                }
+            }
     }
 }
 
