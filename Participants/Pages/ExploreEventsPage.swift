@@ -28,33 +28,8 @@ struct ExploreEventsPage: View {
     var body: some View {
         VStack() {
             ScrollView {
-                FeedbackRequest()
-                    .padding()
                 if let events = events {
-                    VStack(alignment: .leading) {
-                        HStack{Spacer()}
-                        if todayPlanned.count == 0 {
-                            Text("No plans for today")
-                                .foregroundColor(.secondary)
-                        } else {
-                            Text("Your Plans for Today")
-                                .font(.title2)
-                            EventsList(events: todayPlanned)
-                        }
-
-                        HStack {
-                            NavigationLink("See All My Plans")  {
-                                MyPlansPage()
-                            }
-                            .buttonStyle(.bordered)
-                        }
-                    }
-                    .padding([.horizontal])
-                    
                     VStack {
-                        Text("Discover More Events")
-                            .font(.title3)
-                            .padding(.top)
                         ForEach(events) { event in
                             NavigationLink  {
                                 EventPage(eventId: event.id!)

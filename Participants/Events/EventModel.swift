@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-struct EventModel: Identifiable {
+struct EventModel: Identifiable, Codable {
     var id: String?
     var dateCreated: String?
 
